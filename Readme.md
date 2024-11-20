@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Alexey Akutin](https://up.htmlacademy.ru/react/17/user/973763).
-* Наставник: `Неизвестно`.
+* Наставник: [Василий Петрухин](https://htmlacademy.ru/profile/id1528403).
 
 ---
 
