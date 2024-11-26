@@ -1,12 +1,14 @@
 import MainPage from '../../pages/main/main';
+import { Offer } from '../../types';
+import { mockOffers } from '../../mocks/offers';
 
 type AppProps = {
-  citiesCount: number;
+  offers?: Offer[];
 }
 
-function App({citiesCount}: AppProps): JSX.Element {
+function App({offers = mockOffers}: AppProps): JSX.Element {
 
-  return (<MainPage citiesCount={citiesCount}/>);
+  return (<MainPage offers={offers} />);
 }
 
 export default App;

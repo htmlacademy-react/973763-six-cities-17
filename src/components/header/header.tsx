@@ -12,14 +12,14 @@ function Header({ hasNavigation }: HeaderProps): JSX.Element {
             <a className="header__logo-link" href="main.html">
               <img
                 className="header__logo"
-                src="img/logo.svg"
+                src="/img/logo.svg"
                 alt="6 cities logo"
                 width={81}
                 height={41}
               />
             </a>
           </div>
-          {hasNavigation && <HeaderNav isAuthed />}
+          {hasNavigation && <HeaderNav />}
         </div>
       </div>
     </header>

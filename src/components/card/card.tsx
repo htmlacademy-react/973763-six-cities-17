@@ -1,5 +1,5 @@
 
-function PlaceCard(): JSX.Element {
+function Card(): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -9,7 +9,7 @@ function PlaceCard(): JSX.Element {
         <a href="#">
           <img
             className="place-card__image"
-            src="img/apartment-01.jpg"
+            src="/img/apartment-01.jpg"
             width={260}
             height={200}
             alt="Place image"
@@ -53,4 +53,4 @@ function PlaceCard(): JSX.Element {
   );
 }
 
-export default PlaceCard;
+export default Card;

@@ -1,19 +1,20 @@
-import PlaceCard from '../../components/place-card/place-card';
-import Locations from '../../components/locations/locations';
+import CardList from '../../components/card-list/card-list';
+import LocationsList from '../../components/locations-list/locations-list';
 import Header from '../../components/header/header';
+import {Offer} from '../../types';
 
 type MainProps = {
-  citiesCount: number;
-  hasOfferData?: boolean;
+  offers: Offer[];
 }
 
-function Main({citiesCount, hasOfferData = false}: MainProps): JSX.Element {
+function Main({offers}: MainProps): JSX.Element {
+  const hasOfferData = Object.keys(offers).length > 0;
 
   return (
     <div className="page page--gray page--main">
       <Header hasNavigation />
       <main className={`page__main page__main--index ${hasOfferData ? '' : 'page__main--index-empty'}`}>
-        <Locations/>
+        <LocationsList/>
         <div className="cities">
           {hasOfferData ?
             <div className="cities__places-container container">
@@ -43,9 +44,7 @@ function Main({citiesCount, hasOfferData = false}: MainProps): JSX.Element {
                     </li>
                   </ul>
                 </form>
-                <div className="cities__places-list places__list tabs__content">
-                  {Array.from({length: citiesCount}).map((_, i) => <PlaceCard key={i++}/>)}
-                </div>
+                <CardList cards={offers}/>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map"/>
