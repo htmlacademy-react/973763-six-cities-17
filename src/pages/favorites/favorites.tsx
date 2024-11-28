@@ -1,6 +1,6 @@
-import CardList from '../../components/card-list/card-list';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import LocationsList from '../../components/locations-list/locations-list';
 import {Offer} from '../../types';
 import { mockFavoriteOffers } from '../../mocks/offers';
 
@@ -12,7 +12,7 @@ function Favorites({offers = mockFavoriteOffers}: FavoritesProps): JSX.Element {
   const hasOfferData = Object.keys(offers).length > 0;
 
   return (
-    <div className="page page--favorites-empty">
+    <div className={`page ${hasOfferData ? '' : 'page--favorites-empty'}`}>
       <Header hasNavigation/>
 
       <main className={`page__main page__main--favorites ${hasOfferData ? '' : 'page__main--favorites-empty'}`}>
@@ -20,32 +20,7 @@ function Favorites({offers = mockFavoriteOffers}: FavoritesProps): JSX.Element {
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <ul className="favorites__list">
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>Amsterdam</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    <CardList cards={offers} IsFavorites />
-                  </div>
-                </li>
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>Cologne</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    <CardList cards={offers} IsFavorites />
-                  </div>
-                </li>
-              </ul>
+              <LocationsList IsFavorites />
             </section>
           </div>
           :

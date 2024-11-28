@@ -42,4 +42,9 @@ type OfferDetail = Offer & {
   maxAdults: number;
 }
 
-export type {UserData, Offer, OfferDetail};
+type SortType = {
+  name: string;
+  value: string;
+};
+
+export type {UserData, Offer, OfferDetail, SortType};
