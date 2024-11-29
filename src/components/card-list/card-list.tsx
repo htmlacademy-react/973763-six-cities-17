@@ -3,13 +3,14 @@ import {Offer} from '../../types';
 
 type CardListProps = {
   cards: Offer[];
-  IsFavorites: boolean;
+  isFavorites: boolean;
+  cardType: string;
 }
 
-function CardList({cards, IsFavorites}: CardListProps): JSX.Element {
+function CardList({cards, isFavorites, cardType}: CardListProps): JSX.Element {
   return (
     <>
-      {cards.map((card) => <Card IsFavorites={IsFavorites} key={card.id}/>)}
+      {cards.map((card) => <Card isPremium={card.isPremium} isFavorites={isFavorites} cardType={cardType} key={card.id}/>)}
     </>
   );
 }

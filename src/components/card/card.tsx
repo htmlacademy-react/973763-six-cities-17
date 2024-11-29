@@ -1,25 +1,25 @@
 type CardProps = {
-  IsFavorites: boolean;
+  isFavorites: boolean;
+  isPremium: boolean;
+  cardType: string;
 }
 
-function Card({IsFavorites}: CardProps): JSX.Element {
+function Card({isFavorites, isPremium, cardType}: CardProps): JSX.Element {
   return (
-    <article className={`${IsFavorites ? 'favorites__card' : 'cities__card'} place-card`}>
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-      <div className={`${IsFavorites ? 'favorites__image-wrapper' : 'cities__image-wrapper'} place-card__image-wrapper`}>
+    <article className={`${cardType}__card place-card`}>
+      {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
+      <div className={`${cardType}__image-wrapper'} place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"
             src="/img/apartment-01.jpg"
-            width={`${IsFavorites ? 150 : 260}`}
-            height={`${IsFavorites ? 110 : 200}`}
+            width={`${isFavorites ? 150 : 260}`}
+            height={`${isFavorites ? 110 : 200}`}
             alt="Place image"
           />
         </a>
       </div>
-      <div className={`${IsFavorites ? 'favorites__card-info' : ''} place-card__info`}>
+      <div className={`${isFavorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€120</b>

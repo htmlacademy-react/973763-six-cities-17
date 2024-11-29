@@ -8,7 +8,7 @@ type LocationsListProps = {
 function LocationsList({IsFavorites}: LocationsListProps): JSX.Element {
   return (
     <ul className={`${IsFavorites ? 'favorites__list' : 'locations__list tabs__list'}`}>
-      {CITIES_NAMES.map((cityName) => <LocationItem IsFavorites={IsFavorites} cityName={cityName} key={cityName}/>)}
+      {CITIES_NAMES.map((cityName) => <LocationItem isFavorites={IsFavorites} cityName={cityName} key={cityName}/>)}
     </ul>
   );
 }

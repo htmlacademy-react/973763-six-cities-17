@@ -98,6 +98,32 @@ export const mockFavoriteOffers: Offer[] = [
   },
 ];
 
+export const mockNearbyOffers: Offer[] = [
+  {
+    'id': '26ab3b22-9c77-4fa8-b7b6-f50627121be1',
+    'title': 'Waterfront with extraordinary view',
+    'type': 'hotel',
+    'price': 426,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 48.834610000000005,
+      'longitude': 2.335499,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 1.1
+  },
+];
+
 export const mockOfferDetail: OfferDetail = {
   'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
   'title': 'Beautiful & luxurious studio at great location',
@@ -122,15 +148,15 @@ export const mockOfferDetail: OfferDetail = {
   'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   'bedrooms': 3,
   'goods': [
-    'Heating'
+    'Heating', 'Wi-Fi', 'Kitchen'
   ],
   'host': {
     'name': 'Oliver Conner',
-    'avatarUrl': 'https://url-to-image/image.png',
+    'avatarUrl': '/img/avatar-angelina.jpg',
     'isPro': false
   },
   'images': [
-    'https://url-to-image/image.png'
+    'https://url-to-image/image.png', '/img/room.jpg', '/img/apartment-01.jpg', '/img/apartment-02.jpg'
   ],
   'maxAdults': 4
 };

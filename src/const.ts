@@ -21,4 +21,10 @@ const SortOptions: SortType[] = [
   }
 ];
 
-export {CITIES_NAMES, SortOptions};
+const enum CardType {
+  Favorites = 'favorites',
+  Cities = 'cities',
+  NearPlaces = 'near-places',
+}
+
+export {CITIES_NAMES, SortOptions, CardType};
