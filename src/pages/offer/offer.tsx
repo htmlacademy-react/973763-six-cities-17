@@ -9,7 +9,7 @@ import Gallery from '../../components/gallery/gallery';
 import Feedback from '../../components/feedback/feedback';
 
 type OfferProps = {
-  offerDetail: OfferDetail;
+  offerDetail?: OfferDetail;
 }
 
 function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
