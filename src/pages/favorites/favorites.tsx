@@ -5,7 +5,7 @@ import {Offer} from '../../types';
 import { mockFavoriteOffers } from '../../mocks/offers';
 
 type FavoritesProps = {
-  offers: Offer[];
+  offers?: Offer[];
 }
 
 function Favorites({offers = mockFavoriteOffers}: FavoritesProps): JSX.Element {
