@@ -9,7 +9,7 @@ import { Offer } from '../../types';
 import { mockOffers } from '../../mocks/offers';
 import {RoutePath} from '../../routes';
 import {AuthorizationStatus} from '../../const.ts';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
@@ -17,24 +17,25 @@ type AppProps = {
 }
 
 function App({offers = mockOffers}: AppProps): JSX.Element {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path={RoutePath.INDEX} errorElement={<ErrorPage/>}>
+        <Route index element={<MainPage offers={offers} />}/>
+        <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
+        <Route path={RoutePath.FAVORITES} element={
+          <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.NO_AUTH}>
+            <FavoritesPage/>
+          </PrivateRoute>
+        }
+        />
+        <Route path={RoutePath.LOGIN} element={<LoginPage/>}/>
+        <Route path={RoutePath.NOT_FOUND} element={<ErrorPage/>}/>
+      </Route>
+    )
+  );
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={RoutePath.INDEX}>
-          <Route index element={<MainPage offers={offers} />}/>
-          <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
-          <Route path={RoutePath.FAVORITES} element={
-            <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.NO_AUTH}>
-              <FavoritesPage/>
-            </PrivateRoute>
-          }
-          />
-          <Route path={RoutePath.LOGIN} element={<LoginPage/>}/>
-          <Route path={RoutePath.NOT_FOUND} element={<ErrorPage/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   );
 }
 
