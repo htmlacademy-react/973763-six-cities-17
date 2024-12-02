@@ -21,16 +21,18 @@ function App({offers = mockOffers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={RoutePath.INDEX} element={<MainPage offers={offers} />}/>
-        <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
-        <Route path={RoutePath.FAVORITES} element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.NO_AUTH}>
-            <FavoritesPage/>
-          </PrivateRoute>
-        }
-        />
-        <Route path={RoutePath.LOGIN} element={<LoginPage/>}/>
-        <Route path='*' element={<ErrorPage/>}/>
+        <Route path={RoutePath.INDEX}>
+          <Route index element={<MainPage offers={offers} />}/>
+          <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
+          <Route path={RoutePath.FAVORITES} element={
+            <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.NO_AUTH}>
+              <FavoritesPage/>
+            </PrivateRoute>
+          }
+          />
+          <Route path={RoutePath.LOGIN} element={<LoginPage/>}/>
+          <Route path={RoutePath.NOT_FOUND} element={<ErrorPage/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

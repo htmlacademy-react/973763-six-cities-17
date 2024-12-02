@@ -3,16 +3,17 @@ import {AuthorizationStatus} from '../../const';
 import {RoutePath} from '../../routes';
 
 type PrivateRouteProps = {
+  navigatePath: RoutePath;
   authorizationStatus: AuthorizationStatus;
   children: JSX.Element;
 }
 
-function PrivateRoute({authorizationStatus, children}: PrivateRouteProps): JSX.Element {
+function PrivateRoute({navigatePath, authorizationStatus, children}: PrivateRouteProps): JSX.Element {
 
   return (
     authorizationStatus === AuthorizationStatus.AUTH
       ? children
-      : <Navigate to={RoutePath.LOGIN} />
+      : <Navigate to={navigatePath} />
   );
 }
 
