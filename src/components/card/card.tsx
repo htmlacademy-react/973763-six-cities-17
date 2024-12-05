@@ -1,10 +1,15 @@
+import {Offer} from '../../types';
+import {CardType} from '../../const.ts';
+
 type CardProps = {
+  card: Offer;
   isFavorites: boolean;
-  isPremium: boolean;
-  cardType: string;
+  cardType: CardType;
 }
 
-function Card({isFavorites, isPremium, cardType}: CardProps): JSX.Element {
+function Card({card, isFavorites, cardType}: CardProps): JSX.Element {
+  const {isPremium, price, title, type} = card;
+
   return (
     <article className={`${cardType}__card place-card`}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
@@ -22,7 +27,7 @@ function Card({isFavorites, isPremium, cardType}: CardProps): JSX.Element {
       <div className={`${isFavorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€120</b>
+            <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
@@ -47,10 +52,10 @@ function Card({isFavorites, isPremium, cardType}: CardProps): JSX.Element {
         </div>
         <h2 className="place-card__name">
           <a href="#">
-            Beautiful &amp; luxurious apartment at great location
+            {title}
           </a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

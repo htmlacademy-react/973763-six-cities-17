@@ -1,16 +1,17 @@
 import Card from '../card/card';
 import {Offer} from '../../types';
+import {CardType} from '../../const.ts';
 
 type CardListProps = {
   cards: Offer[];
   isFavorites: boolean;
-  cardType: string;
+  cardType: CardType;
 }
 
 function CardList({cards, isFavorites, cardType}: CardListProps): JSX.Element {
   return (
     <>
-      {cards.map((card) => <Card isPremium={card.isPremium} isFavorites={isFavorites} cardType={cardType} key={card.id}/>)}
+      {cards.map((card) => <Card card={card} isFavorites={isFavorites} cardType={cardType} key={card.id}/>)}
     </>
   );
 }

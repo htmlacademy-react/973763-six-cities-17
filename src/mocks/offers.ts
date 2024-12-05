@@ -54,7 +54,7 @@ export const mockOffers: Offer[] = [
     'price': 426,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Cologne',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -69,6 +69,29 @@ export const mockOffers: Offer[] = [
     'isFavorite': false,
     'isPremium': true,
     'rating': 1.1
+  },
+  {
+    'id': '695-f984-422e-add8-e369f88ac21a',
+    'title': 'Amazing and Extremely Central Flat',
+    'type': 'room',
+    'price': 209,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/2.jpg',
+    'city': {
+      'name': 'Hamburg',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 48.868610000000004,
+      'longitude': 2.342499,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': false,
+    'rating': 2.2
   },
 ];
 

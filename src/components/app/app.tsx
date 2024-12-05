@@ -4,17 +4,16 @@ import ErrorPage from '../../pages/error/error';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import { Offer } from '../../types';
-import { mockOffers } from '../../mocks/offers';
 import {RoutePath} from '../../routes';
 import {AuthorizationStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  offers?: Offer[];
+  offers: Offer[];
 }
 
-function App({offers = mockOffers}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path={RoutePath.INDEX} errorElement={<ErrorPage/>}>
