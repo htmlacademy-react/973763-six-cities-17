@@ -3,12 +3,10 @@ import LoginPage from '../../pages/login/login';
 import ErrorPage from '../../pages/error/error';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
-
-
 import { Offer } from '../../types';
 import { mockOffers } from '../../mocks/offers';
 import {RoutePath} from '../../routes';
-import {AuthorizationStatus} from '../../const.ts';
+import {AuthorizationStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 
