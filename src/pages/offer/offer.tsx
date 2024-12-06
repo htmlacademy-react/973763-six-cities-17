@@ -9,13 +9,15 @@ import {CardType} from '../../const';
 import Gallery from '../../components/gallery/gallery';
 import Feedback from '../../components/feedback/feedback';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-
+import {useParams} from 'react-router-dom';
 
 type OfferProps = {
   offerDetail?: OfferDetail;
 }
 
 function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
+  const params = useParams();
+
   return (
     <div className="page">
       <Header hasNavigation />
@@ -85,7 +87,7 @@ function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map type={'offer'}/>
+          <Map type={'offer'} activeOfferId={params.id}/>
         </section>
         <div className="container">
           <section className="near-places places">

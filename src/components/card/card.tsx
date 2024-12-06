@@ -1,20 +1,22 @@
 import {Offer} from '../../types';
-import {CardType} from '../../const.ts';
+import {CardType} from '../../const';
+import {Link} from 'react-router-dom';
 
 type CardProps = {
   card: Offer;
   isFavorites: boolean;
   cardType: CardType;
+  onActiveOfferChange?: (id:string | null) => void;
 }
 
-function Card({card, isFavorites, cardType}: CardProps): JSX.Element {
-  const {isPremium, price, title, type} = card;
+function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JSX.Element {
+  const {isPremium, price, title, type,id} = card;
 
   return (
-    <article className={`${cardType}__card place-card`}>
+    <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange && onActiveOfferChange(id)} onMouseLeave={() => onActiveOfferChange && onActiveOfferChange(null)}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${cardType}__image-wrapper'} place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
             src="/img/apartment-01.jpg"
@@ -22,7 +24,7 @@ function Card({card, isFavorites, cardType}: CardProps): JSX.Element {
             height={`${isFavorites ? 110 : 200}`}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className={`${isFavorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
@@ -51,9 +53,9 @@ function Card({card, isFavorites, cardType}: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">
+          <Link to={`/offer/${id}`}>
             {title}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
