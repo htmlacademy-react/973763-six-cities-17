@@ -119,6 +119,75 @@ export const mockFavoriteOffers: Offer[] = [
     'isPremium': true,
     'rating': 1.1
   },
+  {
+    'id': '26a2-9c77-4fa8-b7b6-f50627121be1',
+    'title': 'Waterfront with extraordinary view',
+    'type': 'hotel',
+    'price': 406,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 45.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 45.834610000000005,
+      'longitude': 2.335499,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 2.1
+  },
+  {
+    'id': '9c77-4fa8-b7b6-f50627121be1',
+    'title': 'Waterfront with extraordinary view',
+    'type': 'hotel',
+    'price': 426,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+    'city': {
+      'name': 'Hamburg',
+      'location': {
+        'latitude': 41.85661,
+        'longitude': 12.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 41.834610000000005,
+      'longitude': 12.335499,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 1.1
+  },
+  {
+    'id': '26ab-9c77-4fa8-b7b6-f50627121be1',
+    'title': 'Waterfront with extraordinary view',
+    'type': 'hotel',
+    'price': 226,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 41.85661,
+        'longitude': 22.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 41.834610000000005,
+      'longitude': 22.335499,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 1.1
+  },
 ];
 
 export const mockNearbyOffers: Offer[] = [

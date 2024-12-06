@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import {Offer} from '../../types';
-import {CardType} from '../../const';
+import {CardType, CITIES_NAMES} from '../../const';
 import { useState } from 'react';
 
 type MainProps = {
@@ -19,7 +19,6 @@ function Main({offers}: MainProps): JSX.Element {
     }
   };
 
-
   const hasOfferData = Object.keys(offers).length > 0;
 
   return (
@@ -29,7 +28,7 @@ function Main({offers}: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList IsFavorites={false}/>
+            <LocationsList IsFavorites={false} cities={CITIES_NAMES}/>
           </section>
         </div>
         <div className="cities">

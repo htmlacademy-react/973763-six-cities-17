@@ -1,14 +1,18 @@
-import { CITIES_NAMES } from '../../const';
 import LocationItem from '../../components/location-item/location-item';
+import {Offer} from '../../types';
+import {getOffersByFilter} from '../../utils.ts';
 
 type LocationsListProps = {
   IsFavorites: boolean;
+  cities: string[];
+  offers: Offer[];
 }
 
-function LocationsList({IsFavorites}: LocationsListProps): JSX.Element {
+function LocationsList({IsFavorites, cities, offers}: LocationsListProps): JSX.Element {
+
   return (
     <ul className={`${IsFavorites ? 'favorites__list' : 'locations__list tabs__list'}`}>
-      {CITIES_NAMES.map((cityName) => <LocationItem isFavorites={IsFavorites} cityName={cityName} key={cityName}/>)}
+      {cities.map((cityName) => <LocationItem isFavorites={IsFavorites} cityName={cityName} offers={getOffersByFilter(offers, cityName)} key={cityName}/>)}
     </ul>
   );
 }

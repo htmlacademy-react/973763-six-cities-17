@@ -20,7 +20,7 @@ function App({offers}: AppProps): JSX.Element {
         <Route index element={<MainPage offers={offers} />}/>
         <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
         <Route path={RoutePath.FAVORITES} element={
-          <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.NO_AUTH}>
+          <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.AUTH}>
             <FavoritesPage/>
           </PrivateRoute>
         }
