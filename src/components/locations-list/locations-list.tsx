@@ -5,14 +5,14 @@ import {getOffersByFilter} from '../../utils.ts';
 type LocationsListProps = {
   IsFavorites: boolean;
   cities: string[];
-  offers: Offer[];
+  offers?: Offer[];
 }
 
 function LocationsList({IsFavorites, cities, offers}: LocationsListProps): JSX.Element {
 
   return (
     <ul className={`${IsFavorites ? 'favorites__list' : 'locations__list tabs__list'}`}>
-      {cities.map((cityName) => <LocationItem isFavorites={IsFavorites} cityName={cityName} offers={getOffersByFilter(offers, cityName)} key={cityName}/>)}
+      {cities.map((cityName) => <LocationItem isFavorites={IsFavorites} cityName={cityName} offers={offers && getOffersByFilter(offers, cityName)} key={cityName}/>)}
     </ul>
   );
 }

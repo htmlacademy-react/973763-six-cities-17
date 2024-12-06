@@ -5,7 +5,7 @@ import {CardType} from '../../const';
 type LocationItemProps = {
   cityName: string;
   isFavorites: boolean;
-  offers: Offer[];
+  offers?: Offer[];
 }
 
 function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.Element {
@@ -22,7 +22,7 @@ function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.E
               </div>
             </div>
             <div className="favorites__places">
-              <CardList cards={offers} isFavorites cardType={CardType.Favorites}/>
+              {offers && <CardList cards={offers} isFavorites cardType={CardType.Favorites}/>}
             </div>
           </>
           :

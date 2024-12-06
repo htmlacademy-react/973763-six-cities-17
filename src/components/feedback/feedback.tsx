@@ -1,11 +1,47 @@
+import {ChangeEvent, useState} from 'react';
+
+type FormDataType = {
+  rating: number;
+  review: string;
+};
+
 function Feedback(): JSX.Element {
+
+  const initialState: FormDataType = {
+    rating: 0,
+    review: ''
+  };
+
+  const [formData, setFormData] = useState(initialState);
+  const [isButtonFormDisabled, setIsButtonFormDisabled] = useState(true);
+
+  const handleChangeValue = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, inputName: keyof FormDataType) => {
+    setFormData((prev) => (
+      {
+        ...prev,
+        [inputName]: e.target.value
+      }
+    ));
+
+    if (formData.review.length > 50 && formData.review.length < 300) {
+      setIsButtonFormDisabled(false);
+    }
+  };
+
+  const handleSubmitForm = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormData(initialState);
+    setIsButtonFormDisabled(true);
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
         <input
+          onChange={(e) => handleChangeValue(e,'rating')}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={5}
@@ -22,6 +58,7 @@ function Feedback(): JSX.Element {
           </svg>
         </label>
         <input
+          onChange={(e) => handleChangeValue(e,'rating')}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={4}
@@ -38,6 +75,7 @@ function Feedback(): JSX.Element {
           </svg>
         </label>
         <input
+          onChange={(e) => handleChangeValue(e,'rating')}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={3}
@@ -54,6 +92,7 @@ function Feedback(): JSX.Element {
           </svg>
         </label>
         <input
+          onChange={(e) => handleChangeValue(e,'rating')}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={2}
@@ -70,6 +109,7 @@ function Feedback(): JSX.Element {
           </svg>
         </label>
         <input
+          onChange={(e) => handleChangeValue(e,'rating')}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={1}
@@ -87,11 +127,12 @@ function Feedback(): JSX.Element {
         </label>
       </div>
       <textarea
+        value={formData.review}
+        onChange={(e) => handleChangeValue(e,'review')}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -103,7 +144,7 @@ function Feedback(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={isButtonFormDisabled}
         >
           Submit
         </button>

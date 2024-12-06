@@ -4,8 +4,9 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import {Offer} from '../../types';
-import {CardType, CITIES_NAMES} from '../../const';
+import {CardType} from '../../const';
 import { useState } from 'react';
+import {getFavoritesCities} from '../../utils';
 
 type MainProps = {
   offers: Offer[];
@@ -28,7 +29,7 @@ function Main({offers}: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList IsFavorites={false} cities={CITIES_NAMES}/>
+            <LocationsList IsFavorites={false} cities={getFavoritesCities(offers)} />
           </section>
         </div>
         <div className="cities">
