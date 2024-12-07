@@ -9,6 +9,14 @@ type UserData = User & {
   token: string;
 };
 
+type Review = {
+  id: string;
+  date: string;
+  user: User;
+  comment: string;
+  rating: number;
+}
+
 type Location = {
   latitude: number;
   longitude: number;
@@ -47,4 +55,4 @@ type SortType = {
   value: string;
 };
 
-export type {UserData, Offer, OfferDetail, SortType};
+export type {UserData, Offer, OfferDetail, SortType, Review};

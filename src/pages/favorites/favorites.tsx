@@ -3,6 +3,7 @@ import Footer from '../../components/footer/footer';
 import LocationsList from '../../components/locations-list/locations-list';
 import {Offer} from '../../types';
 import { mockFavoriteOffers } from '../../mocks/offers';
+import {getFavoritesCities} from '../../utils.ts';
 
 type FavoritesProps = {
   offers?: Offer[];
@@ -20,7 +21,7 @@ function Favorites({offers = mockFavoriteOffers}: FavoritesProps): JSX.Element {
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <LocationsList IsFavorites />
+              <LocationsList IsFavorites cities={getFavoritesCities(offers)} offers={offers}/>
             </section>
           </div>
           :

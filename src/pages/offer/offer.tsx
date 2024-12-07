@@ -4,15 +4,20 @@ import Map from '../../components/map/map';
 import {OfferDetail} from '../../types';
 import { mockOfferDetail } from '../../mocks/offers';
 import { mockNearbyOffers } from '../../mocks/offers';
+import { mockReviews } from '../../mocks/reviews';
 import {CardType} from '../../const';
 import Gallery from '../../components/gallery/gallery';
 import Feedback from '../../components/feedback/feedback';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import {useParams} from 'react-router-dom';
 
 type OfferProps = {
   offerDetail?: OfferDetail;
 }
 
 function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
+  const params = useParams();
+
   return (
     <div className="page">
       <Header hasNavigation />
@@ -77,46 +82,12 @@ function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">1</span>
-                </h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img
-                          className="reviews__avatar user__avatar"
-                          src="/img/avatar-max.jpg"
-                          width={54}
-                          height={54}
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">Max</span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}/>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by
-                        the unique lightness of Amsterdam. The building is green and
-                        from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">
-                        April 2019
-                      </time>
-                    </div>
-                  </li>
-                </ul>
+                <ReviewsList reviews={mockReviews}/>
                 <Feedback/>
               </section>
             </div>
           </div>
-          <Map type={'offer'}/>
+          <Map type={'offer'} activeOfferId={params.id}/>
         </section>
         <div className="container">
           <section className="near-places places">

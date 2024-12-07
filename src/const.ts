@@ -1,7 +1,5 @@
 import { SortType } from './types';
 
-const CITIES_NAMES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
-
 const SortOptions: SortType[] = [
   {
     name: 'Popular',
@@ -33,4 +31,4 @@ enum AuthorizationStatus {
   UNKNOWN = 'UNKNOWN',
 }
 
-export {CITIES_NAMES, SortOptions, CardType, AuthorizationStatus};
+export {SortOptions, CardType, AuthorizationStatus};
