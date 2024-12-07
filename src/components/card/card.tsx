@@ -13,7 +13,7 @@ function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JS
   const {isPremium, price, title, type,id} = card;
 
   return (
-    <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange && onActiveOfferChange(id)} onMouseLeave={() => onActiveOfferChange && onActiveOfferChange(null)}>
+    <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange?.(id)} onMouseLeave={() => onActiveOfferChange?.(null)}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${cardType}__image-wrapper'} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
