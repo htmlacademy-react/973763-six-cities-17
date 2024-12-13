@@ -2,6 +2,7 @@ import CardList from '../card-list/card-list';
 import {Offer} from '../../types';
 import {CardType} from '../../const';
 import React from 'react';
+import {Link} from "react-router-dom";
 
 type LocationItemProps = {
   cityName: string;
@@ -19,9 +20,9 @@ function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}
           <>
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="#">
+                <Link className="locations__item-link" to={''}>
                   <span>{cityName}</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="favorites__places">
@@ -29,14 +30,11 @@ function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}
             </div>
           </>
           :
-          <a className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
-            onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
-              e.preventDefault();
-              onCityNameClick?.(cityName);
-            }}
+          <Link to={''} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
+            onClick={(): void => onCityNameClick?.(cityName)}
           >
             <span>{cityName}</span>
-          </a>
+          </Link>
       }
     </li>
   );
