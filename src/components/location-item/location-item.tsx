@@ -1,8 +1,7 @@
 import CardList from '../card-list/card-list';
 import {Offer} from '../../types';
 import {CardType} from '../../const';
-import React from 'react';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 type LocationItemProps = {
   cityName: string;
