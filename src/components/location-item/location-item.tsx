@@ -1,14 +1,17 @@
 import CardList from '../card-list/card-list';
 import {Offer} from '../../types';
 import {CardType} from '../../const';
+import React from 'react';
 
 type LocationItemProps = {
   cityName: string;
   isFavorites: boolean;
   offers?: Offer[];
+  onCityNameClick?: (cityName:string) => void;
+  isActive: boolean;
 }
 
-function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.Element {
+function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}: LocationItemProps): JSX.Element {
   return (
     <li className={`${isFavorites ? 'favorites__locations-items' : 'locations__item'}`}>
       {
@@ -26,7 +29,12 @@ function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.E
             </div>
           </>
           :
-          <a className="locations__item-link tabs__item" href="#">
+          <a className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
+            onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
+              e.preventDefault();
+              onCityNameClick?.(cityName);
+            }}
+          >
             <span>{cityName}</span>
           </a>
       }

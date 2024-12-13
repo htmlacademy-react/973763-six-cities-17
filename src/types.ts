@@ -55,4 +55,4 @@ type SortType = {
   value: string;
 };
 
-export type {UserData, Offer, OfferDetail, SortType, Review};
+export type {UserData, Offer, OfferDetail, SortType, Review, CityLocation};

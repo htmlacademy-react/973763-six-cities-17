@@ -6,7 +6,7 @@ import Sort from '../../components/sort/sort';
 import {Offer} from '../../types';
 import {CardType} from '../../const';
 import { useState } from 'react';
-import {getFavoritesCities} from '../../utils';
+import {getFavoritesCities, getOffersByFilter} from '../../utils';
 
 type MainProps = {
   offers: Offer[];
@@ -14,9 +14,16 @@ type MainProps = {
 
 function Main({offers}: MainProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const [activeCityName, setActiveCityName] = useState<string>('Amsterdam');
   const handleActiveOfferChange = (id: string | null): void => {
     if (activeOfferId !== id) {
       setActiveOfferId(id);
+    }
+  };
+
+  const handleActiveCityNameChange = (cityName: string): void => {
+    if (activeCityName !== cityName) {
+      setActiveCityName(cityName);
     }
   };
 
@@ -29,7 +36,7 @@ function Main({offers}: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList IsFavorites={false} cities={getFavoritesCities(offers)} />
+            <LocationsList IsFavorites={false} cities={getFavoritesCities(offers)} onCityNameClick={handleActiveCityNameChange} activeCityName={activeCityName}/>
           </section>
         </div>
         <div className="cities">
@@ -44,7 +51,7 @@ function Main({offers}: MainProps): JSX.Element {
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map type={'cities'} activeOfferId={activeOfferId}/>
+                <Map type={'cities'} activeOfferId={activeOfferId} offers={offers && getOffersByFilter(offers, activeCityName)} />
               </div>
             </div>
             :

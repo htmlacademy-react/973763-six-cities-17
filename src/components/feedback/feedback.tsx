@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, FormEvent, useState} from 'react';
 
 type FormDataType = {
   rating: number;
@@ -28,7 +28,7 @@ function Feedback(): JSX.Element {
     }
   };
 
-  const handleSubmitForm = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormData(initialState);
     setIsButtonFormDisabled(true);
