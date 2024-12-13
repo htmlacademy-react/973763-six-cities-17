@@ -285,26 +285,95 @@ export const mockFavoriteOffers: Offer[] = [
 export const mockNearbyOffers: Offer[] = [
   {
     'id': '764fe695-f984-422e-add8-e369f88ac21a',
-    'title': 'Waterfront with extraordinary view',
-    'type': 'hotel',
-    'price': 426,
-    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+    'title': 'Beautiful studio at great location',
+    'type': 'apartment',
+    'price': 469,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/2.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
       }
     },
     'location': {
-      'latitude': 48.834610000000005,
-      'longitude': 2.335499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
-    'isFavorite': true,
-    'isPremium': true,
-    'rating': 1.1
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2.2
+  },
+  {
+    'id': '76495-f984-422e-add8-e369f88ac21a',
+    'title': 'Amazing Central Flat',
+    'type': 'room',
+    'price': 169,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/2.jpg',
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }
+    },
+    'location': {
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2.2
+  },
+  {
+    'id': 'e695-f984-422e-add8-e369f88ac21a',
+    'title': 'Central Flat',
+    'type': 'hotel',
+    'price': 209,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/2.jpg',
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }
+    },
+    'location': {
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2.2
+  },
+  {
+    'id': '764fe-f984-422e-add8-e369f88ac21a',
+    'title': 'Amazing Flat',
+    'type': 'room',
+    'price': 219,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/2.jpg',
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }
+    },
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2.2
   },
 ];
 

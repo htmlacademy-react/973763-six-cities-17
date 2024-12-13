@@ -1,4 +1,8 @@
-import { SortType } from './types';
+import {CityName, SortType} from './types';
+
+const CITIES_NAMES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+const DEFAULT_CITY_NAME: CityName = CITIES_NAMES[3];
 
 const SortOptions: SortType[] = [
   {
@@ -19,10 +23,17 @@ const SortOptions: SortType[] = [
   }
 ];
 
-const enum CardType {
+enum CardType {
   Favorites = 'favorites',
   Cities = 'cities',
   NearPlaces = 'near-places',
+}
+
+enum ClassNamePrefix {
+  Offer = 'offer',
+  PlaceCard = 'place-card',
+  Reviews = 'reviews',
+  Cities = 'cities'
 }
 
 enum AuthorizationStatus {
@@ -31,4 +42,24 @@ enum AuthorizationStatus {
   UNKNOWN = 'UNKNOWN',
 }
 
-export {SortOptions, CardType, AuthorizationStatus};
+const ReviewTextLength = {
+  MIN: 50,
+  MAX: 300
+} as const;
+
+const UrlMarker = {
+  DEFAULT: '/img/pin.svg',
+  CURRENT: '/img/pin-active.svg'
+} as const;
+
+const IconMarkerSize = {
+  WIDTH: 27,
+  HEIGHT: 39
+} as const;
+
+const IconAnchorSize = {
+  WIDTH: IconMarkerSize.WIDTH / 2,
+  HEIGHT: IconMarkerSize.HEIGHT
+} as const;
+
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, UrlMarker, IconAnchorSize, IconMarkerSize};

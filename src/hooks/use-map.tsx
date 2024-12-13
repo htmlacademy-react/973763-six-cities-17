@@ -28,7 +28,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityLocation
     } else {
       map?.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, map]);
 
   return map;
 }

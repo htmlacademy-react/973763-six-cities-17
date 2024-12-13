@@ -1,13 +1,9 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
-
-// import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
 import 'leaflet/dist/leaflet.css';
 import {Offer} from '../../types.ts';
-const URL_MARKER_DEFAULT = 'img/pin.svg';
-const URL_MARKER_CURRENT = 'img/pin-active.svg';
-
+import {UrlMarker, IconMarkerSize, IconAnchorSize} from '../../const.ts';
 
 type MapProps = {
   type: string;
@@ -15,14 +11,14 @@ type MapProps = {
   offers: Offer[];
 };
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  // iconSize: [40, 40],
-  // iconAnchor: [20, 40]
+  iconUrl: UrlMarker.DEFAULT,
+  iconSize: [IconMarkerSize.WIDTH, IconMarkerSize.HEIGHT],
+  iconAnchor: [IconAnchorSize.WIDTH, IconAnchorSize.HEIGHT]
 });
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  // iconSize: [40, 40],
-  // iconAnchor: [20, 40]
+  iconUrl: UrlMarker.CURRENT,
+  iconSize: [IconMarkerSize.WIDTH, IconMarkerSize.HEIGHT],
+  iconAnchor: [IconAnchorSize.WIDTH, IconAnchorSize.HEIGHT]
 });
 function Map({type, activeOfferId, offers}: MapProps): JSX.Element {
 
