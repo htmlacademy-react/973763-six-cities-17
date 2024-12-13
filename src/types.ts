@@ -1,3 +1,7 @@
+import { CITIES_NAMES } from './const';
+
+type CityName = typeof CITIES_NAMES[number];
+
 type User = {
   name: string;
   avatarUrl: string;
@@ -24,7 +28,7 @@ type Location = {
 }
 
 type CityLocation = {
-  name: string;
+  name: CityName;
   location: Location;
 }
 
@@ -55,4 +59,4 @@ type SortType = {
   value: string;
 };
 
-export type {UserData, Offer, OfferDetail, SortType, Review};
+export type {UserData, Offer, OfferDetail, SortType, Review, CityLocation, CityName};

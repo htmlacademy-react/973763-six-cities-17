@@ -1,14 +1,17 @@
 import CardList from '../card-list/card-list';
 import {Offer} from '../../types';
 import {CardType} from '../../const';
+import {Link} from 'react-router-dom';
 
 type LocationItemProps = {
   cityName: string;
   isFavorites: boolean;
   offers?: Offer[];
+  onCityNameClick?: (cityName:string) => void;
+  isActive: boolean;
 }
 
-function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.Element {
+function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}: LocationItemProps): JSX.Element {
   return (
     <li className={`${isFavorites ? 'favorites__locations-items' : 'locations__item'}`}>
       {
@@ -16,9 +19,9 @@ function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.E
           <>
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="#">
+                <Link className="locations__item-link" to={''}>
                   <span>{cityName}</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="favorites__places">
@@ -26,9 +29,11 @@ function LocationItem({cityName, isFavorites, offers}: LocationItemProps): JSX.E
             </div>
           </>
           :
-          <a className="locations__item-link tabs__item" href="#">
+          <Link to={''} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
+            onClick={(): void => onCityNameClick?.(cityName)}
+          >
             <span>{cityName}</span>
-          </a>
+          </Link>
       }
     </li>
   );

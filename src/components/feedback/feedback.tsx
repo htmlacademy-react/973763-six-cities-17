@@ -1,4 +1,5 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, FormEvent, useState} from 'react';
+import {ReviewTextLength} from '../../const.ts';
 
 type FormDataType = {
   rating: number;
@@ -23,12 +24,12 @@ function Feedback(): JSX.Element {
       }
     ));
 
-    if (formData.review.length > 50 && formData.review.length < 300) {
+    if (formData.review.length > ReviewTextLength.MIN && formData.review.length < ReviewTextLength.MAX) {
       setIsButtonFormDisabled(false);
     }
   };
 
-  const handleSubmitForm = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormData(initialState);
     setIsButtonFormDisabled(true);
