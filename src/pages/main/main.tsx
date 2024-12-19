@@ -3,16 +3,14 @@ import LocationsList from '../../components/locations-list/locations-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
-import {Offer} from '../../types';
 import {CardType, CITIES_NAMES, DEFAULT_CITY_NAME} from '../../const';
 import { useState } from 'react';
 import {getOffersByCity} from '../../utils';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
-type MainProps = {
-  offers: Offer[];
-}
 
-function Main({offers}: MainProps): JSX.Element {
+function Main(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   const [activeCityName, setActiveCityName] = useState<string>(DEFAULT_CITY_NAME);
   const handleActiveOfferChange = (id: string | null): void => {

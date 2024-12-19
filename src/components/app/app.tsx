@@ -3,21 +3,17 @@ import LoginPage from '../../pages/login/login';
 import ErrorPage from '../../pages/error/error';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
-import { Offer } from '../../types';
 import {RoutePath} from '../../routes';
 import {AuthorizationStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
-  offers: Offer[];
-}
 
-function App({offers}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path={RoutePath.INDEX} errorElement={<ErrorPage/>}>
-        <Route index element={<MainPage offers={offers} />}/>
+        <Route index element={<MainPage/>}/>
         <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
         <Route path={RoutePath.FAVORITES} element={
           <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.AUTH}>
