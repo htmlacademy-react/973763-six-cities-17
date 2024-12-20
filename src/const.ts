@@ -23,6 +23,8 @@ const SortOptions: SortType[] = [
   }
 ];
 
+const DEFAULT_SORT_OPTION: SortType = SortOptions[0];
+
 enum CardType {
   Favorites = 'favorites',
   Cities = 'cities',
@@ -62,4 +64,4 @@ const IconAnchorSize = {
   HEIGHT: IconMarkerSize.HEIGHT
 } as const;
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, UrlMarker, IconAnchorSize, IconMarkerSize};
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, UrlMarker, IconAnchorSize, IconMarkerSize, DEFAULT_SORT_OPTION};

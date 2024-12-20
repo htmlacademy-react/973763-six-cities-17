@@ -5,7 +5,7 @@ import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import {CardType, CITIES_NAMES} from '../../const';
 import {useEffect, useState} from 'react';
-import {getOffersByCity} from '../../utils';
+import {getOffersByCity, getOffersBySortOption} from '../../utils';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {mockOffers} from '../../mocks/offers';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
@@ -20,6 +20,7 @@ function Main(): JSX.Element {
 
   const offers = useAppSelector((state) => state.offers);
   const activeCityName = useAppSelector((state) => state.activeCityName);
+  const sortOption = useAppSelector((state) => state.offerSortOption);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null): void => {
@@ -29,6 +30,7 @@ function Main(): JSX.Element {
   };
 
   const filteredOffersByActiveCity = getOffersByCity(offers, activeCityName);
+  const sortedOffers = getOffersBySortOption(filteredOffersByActiveCity, sortOption);
   const hasOfferData = filteredOffersByActiveCity.length > 0;
 
   return (
@@ -47,13 +49,13 @@ function Main(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{filteredOffersByActiveCity.length} places to stay in {activeCityName}</b>
-                <Sort/>
+                <Sort sortOption={sortOption} />
                 <div className="cities__places-list places__list tabs__content">
-                  <CardList cards={filteredOffersByActiveCity} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={handleActiveOfferChange}/>
+                  <CardList cards={sortedOffers} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={handleActiveOfferChange}/>
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map type={'cities'} activeOfferId={activeOfferId} offers={filteredOffersByActiveCity} />
+                <Map type={'cities'} activeOfferId={activeOfferId} offers={sortedOffers} />
               </div>
             </div>
             :

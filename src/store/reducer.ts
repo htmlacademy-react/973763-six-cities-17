@@ -1,11 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, setActiveCityName} from './action';
-import {DEFAULT_CITY_NAME} from '../const';
+import {loadOffers, setActiveCityName, changeOfferSortOption} from './action';
+import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION} from '../const';
 import {InitialState} from './types.ts';
 
 const initialState: InitialState = {
   offers: [],
   activeCityName: DEFAULT_CITY_NAME,
+  offerSortOption: DEFAULT_SORT_OPTION
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -15,6 +16,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setActiveCityName, (state, action) => {
       state.activeCityName = action.payload;
+    })
+    .addCase(changeOfferSortOption, (state, action) => {
+      state.offerSortOption = action.payload;
     });
 });
 
