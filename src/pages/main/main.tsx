@@ -3,7 +3,7 @@ import LocationsList from '../../components/locations-list/locations-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
-import {CardType, CITIES_NAMES, DEFAULT_CITY_NAME} from '../../const';
+import {CardType, CITIES_NAMES} from '../../const';
 import { useState } from 'react';
 import {getOffersByCity} from '../../utils';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
@@ -11,17 +11,12 @@ import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
 function Main(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
+  const activeCityName = useAppSelector((state) => state.activeCityName);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const [activeCityName, setActiveCityName] = useState<string>(DEFAULT_CITY_NAME);
+
   const handleActiveOfferChange = (id: string | null): void => {
     if (activeOfferId !== id) {
       setActiveOfferId(id);
-    }
-  };
-
-  const handleActiveCityNameChange = (cityName: string): void => {
-    if (activeCityName !== cityName) {
-      setActiveCityName(cityName);
     }
   };
 
@@ -35,7 +30,7 @@ function Main(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList IsFavorites={false} cities={CITIES_NAMES} onCityNameClick={handleActiveCityNameChange} activeCityName={activeCityName}/>
+            <LocationsList IsFavorites={false} cities={CITIES_NAMES} activeCityName={activeCityName}/>
           </section>
         </div>
         <div className="cities">

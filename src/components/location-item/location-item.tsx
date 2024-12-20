@@ -1,17 +1,20 @@
 import CardList from '../card-list/card-list';
-import {Offer} from '../../types';
+import {CityName, Offer} from '../../types';
 import {CardType} from '../../const';
 import {Link} from 'react-router-dom';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {setActiveCityName} from '../../store/action';
 
 type LocationItemProps = {
-  cityName: string;
+  cityName: CityName;
   isFavorites: boolean;
   offers?: Offer[];
-  onCityNameClick?: (cityName:string) => void;
   isActive: boolean;
 }
 
-function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}: LocationItemProps): JSX.Element {
+function LocationItem({cityName, isFavorites, offers, isActive}: LocationItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <li className={`${isFavorites ? 'favorites__locations-items' : 'locations__item'}`}>
       {
@@ -19,7 +22,7 @@ function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}
           <>
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <Link className="locations__item-link" to={''}>
+                <Link className="locations__item-link" to={' '}>
                   <span>{cityName}</span>
                 </Link>
               </div>
@@ -29,8 +32,10 @@ function LocationItem({cityName, isFavorites, offers, onCityNameClick, isActive}
             </div>
           </>
           :
-          <Link to={''} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
-            onClick={(): void => onCityNameClick?.(cityName)}
+          <Link to={' '} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
+            onClick={() => {
+              dispatch(setActiveCityName(cityName));
+            }}
           >
             <span>{cityName}</span>
           </Link>
