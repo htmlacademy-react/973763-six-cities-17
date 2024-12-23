@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, setActiveCityName, changeOfferSortOption} from './action';
+import {setOffers, setActiveCityName, changeOfferSortOption} from './action';
 import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION} from '../const';
 import {InitialState} from './types.ts';
 
@@ -11,7 +11,7 @@ const initialState: InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadOffers, (state, action) => {
+    .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
     })
     .addCase(setActiveCityName, (state, action) => {

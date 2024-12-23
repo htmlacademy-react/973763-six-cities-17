@@ -1,7 +1,7 @@
 import {SortOptions} from '../../const';
 import {SortType} from '../../types';
 import {useState} from 'react';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppDispatch } from '../../store/use-app-dispatch';
 import {changeOfferSortOption} from '../../store/action';
 
 type SortProps = {

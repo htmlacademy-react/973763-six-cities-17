@@ -6,16 +6,16 @@ import Sort from '../../components/sort/sort';
 import {CardType, CITIES_NAMES} from '../../const';
 import {useEffect, useState} from 'react';
 import {getOffersByCity, getOffersBySortOption} from '../../utils';
-import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {useAppSelector} from '../../store/use-app-selector';
 import {mockOffers} from '../../mocks/offers';
-import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {loadOffers} from '../../store/action';
+import {useAppDispatch} from '../../store/use-app-dispatch';
+import {setOffers} from '../../store/action';
 
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(loadOffers(mockOffers));
+    dispatch(setOffers(mockOffers));
   }, [dispatch]);
 
   const offers = useAppSelector((state) => state.offers);

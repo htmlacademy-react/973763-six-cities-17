@@ -2,7 +2,7 @@ import CardList from '../card-list/card-list';
 import {CityName, Offer} from '../../types';
 import {CardType} from '../../const';
 import {Link} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {useAppDispatch} from '../../store/use-app-dispatch';
 import {setActiveCityName} from '../../store/action';
 
 type LocationItemProps = {
