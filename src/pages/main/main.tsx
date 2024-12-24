@@ -3,31 +3,34 @@ import LocationsList from '../../components/locations-list/locations-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
-import {Offer} from '../../types';
-import {CardType, CITIES_NAMES, DEFAULT_CITY_NAME} from '../../const';
-import { useState } from 'react';
-import {getOffersByCity} from '../../utils';
+import {CardType, CITIES_NAMES} from '../../const';
+import {useEffect, useState} from 'react';
+import {getOffersByCity, getOffersBySortOption} from '../../utils';
+import {useAppSelector} from '../../store/use-app-selector';
+import {mockOffers} from '../../mocks/offers';
+import {useAppDispatch} from '../../store/use-app-dispatch';
+import {setOffers} from '../../store/action';
 
-type MainProps = {
-  offers: Offer[];
-}
 
-function Main({offers}: MainProps): JSX.Element {
+function Main(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setOffers(mockOffers));
+  }, [dispatch]);
+
+  const offers = useAppSelector((state) => state.offers);
+  const activeCityName = useAppSelector((state) => state.activeCityName);
+  const sortOption = useAppSelector((state) => state.offerSortOption);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const [activeCityName, setActiveCityName] = useState<string>(DEFAULT_CITY_NAME);
+
   const handleActiveOfferChange = (id: string | null): void => {
     if (activeOfferId !== id) {
       setActiveOfferId(id);
     }
   };
 
-  const handleActiveCityNameChange = (cityName: string): void => {
-    if (activeCityName !== cityName) {
-      setActiveCityName(cityName);
-    }
-  };
-
   const filteredOffersByActiveCity = getOffersByCity(offers, activeCityName);
+  const sortedOffers = getOffersBySortOption(filteredOffersByActiveCity, sortOption);
   const hasOfferData = filteredOffersByActiveCity.length > 0;
 
   return (
@@ -37,7 +40,7 @@ function Main({offers}: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList IsFavorites={false} cities={CITIES_NAMES} onCityNameClick={handleActiveCityNameChange} activeCityName={activeCityName}/>
+            <LocationsList IsFavorites={false} cities={CITIES_NAMES} activeCityName={activeCityName}/>
           </section>
         </div>
         <div className="cities">
@@ -46,13 +49,13 @@ function Main({offers}: MainProps): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{filteredOffersByActiveCity.length} places to stay in {activeCityName}</b>
-                <Sort/>
+                <Sort sortOption={sortOption} />
                 <div className="cities__places-list places__list tabs__content">
-                  <CardList cards={filteredOffersByActiveCity} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={handleActiveOfferChange}/>
+                  <CardList cards={sortedOffers} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={handleActiveOfferChange}/>
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map type={'cities'} activeOfferId={activeOfferId} offers={filteredOffersByActiveCity} />
+                <Map type={'cities'} activeOfferId={activeOfferId} offers={sortedOffers} />
               </div>
             </div>
             :

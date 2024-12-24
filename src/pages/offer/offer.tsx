@@ -19,6 +19,7 @@ function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
   const params = useParams();
   const nearByOffers = mockNearbyOffers.filter((offer) => offer.id !== params.id).slice(0, 3);
   const currentOffer = mockNearbyOffers.filter((offer) => offer.id === params.id);
+  const mapOffers = [...currentOffer, ...nearByOffers];
 
   return (
     <div className="page">
@@ -89,7 +90,7 @@ function Offer({offerDetail = mockOfferDetail}: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map type={'offer'} activeOfferId={params.id} offers={[...currentOffer, ...nearByOffers]}/>
+          <Map type={'offer'} activeOfferId={params.id} offers={mapOffers}/>
         </section>
         <div className="container">
           <section className="near-places places">
