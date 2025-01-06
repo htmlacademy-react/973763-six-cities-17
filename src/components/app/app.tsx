@@ -7,9 +7,19 @@ import {RoutePath} from '../../routes';
 import {AuthorizationStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
+import {useAppSelector} from '../../store/use-app-selector';
+import Spinner from '../../components/spinner/spinner';
 
 
 function App(): JSX.Element {
+  const isOffersLoading = useAppSelector((state) => state.offersLoadingStatus);
+
+  if (isOffersLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path={RoutePath.INDEX} errorElement={<ErrorPage/>}>

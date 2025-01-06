@@ -10,7 +10,7 @@ type CardProps = {
 }
 
 function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JSX.Element {
-  const {isPremium, price, title, type,id} = card;
+  const {isPremium, price, title, type,id, previewImage} = card;
 
   return (
     <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange?.(id)} onMouseLeave={() => onActiveOfferChange?.(null)}>
@@ -19,7 +19,7 @@ function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JS
         <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
-            src="/img/apartment-01.jpg"
+            src={previewImage}
             width={`${isFavorites ? 150 : 260}`}
             height={`${isFavorites ? 110 : 200}`}
             alt="Place image"

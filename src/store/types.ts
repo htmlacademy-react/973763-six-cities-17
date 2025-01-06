@@ -9,5 +9,6 @@ export type InitialState = {
   offers: Offer[];
   activeCityName: CityName;
   offerSortOption: SortType;
+  offersLoadingStatus: boolean;
 }
 
