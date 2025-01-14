@@ -8,11 +8,12 @@ import {AuthorizationStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
+import {getOffersLoadingStatus} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
 
 
 function App(): JSX.Element {
-  const isOffersLoading = useAppSelector((state) => state.offersLoadingStatus);
+  const isOffersLoading = useAppSelector(getOffersLoadingStatus);
 
   if (isOffersLoading) {
     return (
