@@ -4,18 +4,26 @@ import ErrorPage from '../../pages/error/error';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import {RoutePath} from '../../routes';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, LoadingStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
 import {getOffersLoadingStatus} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
-
+import {useEffect} from 'react';
+import {useAppDispatch} from '../../store/use-app-dispatch';
+import {fetchOffersAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
-  const isOffersLoading = useAppSelector(getOffersLoadingStatus);
+  const dispatch = useAppDispatch();
+  const offersLoadingStatus = useAppSelector(getOffersLoadingStatus);
 
-  if (isOffersLoading) {
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+    //checkAuth
+  }, [dispatch]);
+
+  if (offersLoadingStatus === LoadingStatus.NotLoaded || offersLoadingStatus === LoadingStatus.Loading) {
     return (
       <Spinner />
     );

@@ -71,8 +71,18 @@ const MapInfo = {
 
 enum APIRoute {
   Offers = '/offers',
+  Nearby = '/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments',
   Login = '/login',
   Logout = '/logout',
 }
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute};
+enum LoadingStatus {
+  NotLoaded = 'notLoaded',
+  Loading = 'loading',
+  Loaded = 'loaded',
+  Failed = 'failed'
+}
+
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus};

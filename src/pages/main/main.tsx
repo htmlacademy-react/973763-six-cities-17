@@ -4,20 +4,11 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import {CardType, CITIES_NAMES} from '../../const';
-// import {useEffect, useState} from 'react';
 import {useState} from 'react';
 import {useAppSelector} from '../../store/use-app-selector';
 import {getActiveCityName, getSortOption, getSortedOffers} from '../../store/selectors';
-// import {mockOffers} from '../../mocks/offers';
-// import {useAppDispatch} from '../../store/use-app-dispatch';
-// import {setOffers} from '../../store/action';
-
 
 function Main(): JSX.Element {
-  // const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(setOffers(mockOffers));
-  // }, [dispatch]);
 
   const activeCityName = useAppSelector(getActiveCityName);
   const sortOption = useAppSelector(getSortOption);
