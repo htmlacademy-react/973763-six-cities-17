@@ -8,7 +8,7 @@ import {AuthorizationStatus, LoadingStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getOffersLoadingStatus} from '../../store/selectors';
+import {getOffersLoadingStatus, getAutorizationStatus, getFavoritesLoadingStatus} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
 import {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
@@ -17,13 +17,14 @@ import {fetchOffersAction} from '../../store/api-actions';
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const offersLoadingStatus = useAppSelector(getOffersLoadingStatus);
+  const favoritesLoadingStatus = useAppSelector(getFavoritesLoadingStatus);
+  const authorizationStatus = useAppSelector(getAutorizationStatus);
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-    //checkAuth
-  }, [dispatch]);
+  }, [dispatch, authorizationStatus]);
 
-  if (offersLoadingStatus === LoadingStatus.NotLoaded || offersLoadingStatus === LoadingStatus.Loading) {
+  if (offersLoadingStatus === LoadingStatus.NotLoaded || offersLoadingStatus === LoadingStatus.Loading || favoritesLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN) {
     return (
       <Spinner />
     );
@@ -35,7 +36,7 @@ function App(): JSX.Element {
         <Route index element={<MainPage/>}/>
         <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
         <Route path={RoutePath.FAVORITES} element={
-          <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.AUTH}>
+          <PrivateRoute navigatePath={RoutePath.LOGIN} >
             <FavoritesPage/>
           </PrivateRoute>
         }
