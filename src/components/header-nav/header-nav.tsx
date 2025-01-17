@@ -1,5 +1,3 @@
-// import { userMock } from '../../mocks/user';
-// import { mockFavoriteOffers } from '../../mocks/offers';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../routes';
 import {getAutorizationStatus, getUserData, getFavoritesLoadingStatus, getFavoriteOffers} from '../../store/selectors';
@@ -17,10 +15,10 @@ function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isAuthed && favoritesLoadingStatus === LoadingStatus.NotLoaded) {
+    if (authorizationStatus === AuthorizationStatus.AUTH && (favoritesLoadingStatus === LoadingStatus.NotLoaded || favoritesLoadingStatus === LoadingStatus.Failed)) {
       dispatch(fetchFavoritesAction());
     }
-  }, [dispatch, isAuthed, favoritesLoadingStatus]);
+  }, [dispatch, favoritesLoadingStatus, authorizationStatus]);
 
   const favoritesCount = useAppSelector(getFavoriteOffers).length;
 
@@ -28,7 +26,6 @@ function HeaderNav(): JSX.Element {
     evt.preventDefault();
     dispatch(logoutAction());
   };
-
 
   return (
     <nav className="header__nav">

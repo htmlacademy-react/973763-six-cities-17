@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setActiveCityName, changeOfferSortOption, clearFavoriteOffers} from './action';
+import {setActiveCityName, changeOfferSortOption} from './action';
 import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION, LoadingStatus, AuthorizationStatus} from '../const';
 import {InitialState} from './types.ts';
 import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, loginAction, logoutAction} from './api-actions';
@@ -36,16 +36,13 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchFavoritesAction.rejected, (state) => {
       state.favoritesLoadingStatus = LoadingStatus.Failed;
+      state.favoriteOffers = [];
     })
     .addCase(setActiveCityName, (state, action) => {
       state.activeCityName = action.payload;
     })
     .addCase(changeOfferSortOption, (state, action) => {
       state.offerSortOption = action.payload;
-    })
-    .addCase(clearFavoriteOffers, (state) => {
-      state.favoriteOffers = [];
-      state.favoritesLoadingStatus = LoadingStatus.NotLoaded;
     })
     .addCase(checkAuthAction.pending, (state) => {
       state.authorizationStatus = AuthorizationStatus.UNKNOWN;
@@ -67,6 +64,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(logoutAction.fulfilled, (state) => {
       state.authorizationStatus = AuthorizationStatus.NO_AUTH;
       state.userData = null;
+      state.favoriteOffers = [];
+      state.favoritesLoadingStatus = LoadingStatus.NotLoaded;
     });
 });
 

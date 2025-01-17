@@ -3,9 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from './types.ts';
 import {Offer, AuthData, UserData} from '../types';
 import {saveToken, dropToken} from '../services/token';
-// import {APIRoute, AuthorizationStatus} from '../const';
 import {APIRoute} from '../const';
-import {clearFavoriteOffers} from './action';
 
 type AsyncThunkApiType = {
   dispatch: AppDispatch;
@@ -48,9 +46,8 @@ export const loginAction = createAsyncThunk<UserData, AuthData, AsyncThunkApiTyp
 
 export const logoutAction = createAsyncThunk<void, undefined, AsyncThunkApiType>(
   'user/logout',
-  async (_arg, {dispatch, extra: api }) => {
+  async (_arg, {extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(clearFavoriteOffers());
   },
 );

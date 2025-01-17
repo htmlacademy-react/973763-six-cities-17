@@ -2,7 +2,7 @@ import {CityName, SortType} from './types';
 
 const CITIES_NAMES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-const DEFAULT_CITY_NAME: CityName = CITIES_NAMES[3];
+const DEFAULT_CITY_NAME: CityName = CITIES_NAMES[0];
 
 const SortOptions: SortType[] = [
   {
@@ -49,6 +49,11 @@ const ReviewTextLength = {
   MAX: 300
 } as const;
 
+const PasswordLength = {
+  MIN: 2
+} as const;
+
+
 const UrlMarker = {
   DEFAULT: '/img/pin.svg',
   CURRENT: '/img/pin-active.svg'
@@ -85,4 +90,4 @@ enum LoadingStatus {
   Failed = 'failed'
 }
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus};
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus};

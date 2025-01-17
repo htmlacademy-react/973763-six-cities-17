@@ -33,9 +33,7 @@ function LocationItem({cityName, isFavorites, offers, isActive}: LocationItemPro
           </>
           :
           <Link to={' '} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
-            onClick={() => {
-              dispatch(setActiveCityName(cityName));
-            }}
+            onClick={() => dispatch(setActiveCityName(cityName))}
           >
             <span>{cityName}</span>
           </Link>
