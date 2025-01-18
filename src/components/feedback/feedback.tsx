@@ -1,5 +1,5 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
-import {ReviewTextLength} from '../../const.ts';
+import {ReviewTextLength} from '../../const';
 
 type FormDataType = {
   rating: number;

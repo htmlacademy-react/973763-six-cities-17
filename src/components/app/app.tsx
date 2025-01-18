@@ -4,17 +4,27 @@ import ErrorPage from '../../pages/error/error';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import {RoutePath} from '../../routes';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, LoadingStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
+import {getOffersLoadingStatus, getAutorizationStatus, getFavoritesLoadingStatus} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
-
+import {useEffect} from 'react';
+import {useAppDispatch} from '../../store/use-app-dispatch';
+import {fetchOffersAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
-  const isOffersLoading = useAppSelector((state) => state.offersLoadingStatus);
+  const dispatch = useAppDispatch();
+  const offersLoadingStatus = useAppSelector(getOffersLoadingStatus);
+  const favoritesLoadingStatus = useAppSelector(getFavoritesLoadingStatus);
+  const authorizationStatus = useAppSelector(getAutorizationStatus);
 
-  if (isOffersLoading) {
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, [dispatch, authorizationStatus]);
+
+  if (offersLoadingStatus === LoadingStatus.NotLoaded || offersLoadingStatus === LoadingStatus.Loading || favoritesLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN) {
     return (
       <Spinner />
     );
@@ -26,7 +36,7 @@ function App(): JSX.Element {
         <Route index element={<MainPage/>}/>
         <Route path={RoutePath.OFFER} element={<OfferPage/>}/>
         <Route path={RoutePath.FAVORITES} element={
-          <PrivateRoute navigatePath={RoutePath.LOGIN} authorizationStatus={AuthorizationStatus.AUTH}>
+          <PrivateRoute navigatePath={RoutePath.LOGIN} >
             <FavoritesPage/>
           </PrivateRoute>
         }

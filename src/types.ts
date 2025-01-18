@@ -13,6 +13,12 @@ type UserData = User & {
   token: string;
 };
 
+type AuthData = {
+  email: string;
+  password: string;
+};
+
+
 type Review = {
   id: string;
   date: string;
@@ -59,4 +65,4 @@ type SortType = {
   value: string;
 };
 
-export type {UserData, Offer, OfferDetail, SortType, Review, CityLocation, CityName};
+export type {UserData, AuthData, Offer, OfferDetail, SortType, Review, CityLocation, CityName};

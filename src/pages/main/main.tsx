@@ -4,24 +4,16 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import {CardType, CITIES_NAMES} from '../../const';
-// import {useEffect, useState} from 'react';
 import {useState} from 'react';
-import {getOffersByCity, getOffersBySortOption} from '../../utils';
 import {useAppSelector} from '../../store/use-app-selector';
-// import {mockOffers} from '../../mocks/offers';
-// import {useAppDispatch} from '../../store/use-app-dispatch';
-// import {setOffers} from '../../store/action';
-
+import {getActiveCityName, getSortOption, getSortedOffers} from '../../store/selectors';
 
 function Main(): JSX.Element {
-  // const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(setOffers(mockOffers));
-  // }, [dispatch]);
 
-  const offers = useAppSelector((state) => state.offers);
-  const activeCityName = useAppSelector((state) => state.activeCityName);
-  const sortOption = useAppSelector((state) => state.offerSortOption);
+  const activeCityName = useAppSelector(getActiveCityName);
+  const sortOption = useAppSelector(getSortOption);
+  const sortedOffers = useAppSelector(getSortedOffers);
+  const hasOfferData = sortedOffers.length > 0;
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null): void => {
@@ -29,10 +21,6 @@ function Main(): JSX.Element {
       setActiveOfferId(id);
     }
   };
-
-  const filteredOffersByActiveCity = getOffersByCity(offers, activeCityName);
-  const sortedOffers = getOffersBySortOption(filteredOffersByActiveCity, sortOption);
-  const hasOfferData = filteredOffersByActiveCity.length > 0;
 
   return (
     <div className="page page--gray page--main">
@@ -49,7 +37,7 @@ function Main(): JSX.Element {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{filteredOffersByActiveCity.length} places to stay in {activeCityName}</b>
+                <b className="places__found">{sortedOffers.length} places to stay in {activeCityName}</b>
                 <Sort sortOption={sortOption} />
                 <div className="cities__places-list places__list tabs__content">
                   <CardList cards={sortedOffers} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={handleActiveOfferChange}/>
