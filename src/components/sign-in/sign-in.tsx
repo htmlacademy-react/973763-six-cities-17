@@ -19,6 +19,7 @@ function SignIn(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [isPasswordValidationError, setPasswordValidationErrorStatus] = useState<boolean>(false);
   const [isEmailValidationError, setEmailValidationErrorStatus] = useState<boolean>(false);
+  const [isFormDisabled, setFormDisabledStatus] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -29,16 +30,20 @@ function SignIn(): JSX.Element {
   const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (isEmailInvalid(evt.target.value)) {
       setEmailValidationErrorStatus(true);
+      setFormDisabledStatus(true);
     } else {
       setEmailValidationErrorStatus(false);
+      setFormDisabledStatus(false);
     }
   };
 
   const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (isPasswordInvalid(evt.target.value)) {
       setPasswordValidationErrorStatus(true);
+      setFormDisabledStatus(true);
     } else {
       setPasswordValidationErrorStatus(false);
+      setFormDisabledStatus(false);
     }
   };
 
@@ -48,11 +53,16 @@ function SignIn(): JSX.Element {
       return;
     }
 
+    setFormDisabledStatus(true);
     dispatch(loginAction({
       email: loginRef.current.value,
       password: passwordRef.current.value
-    }));
-    navigate(RoutePath.INDEX);
+    })).then((response)=> {
+      setFormDisabledStatus(false);
+      if (response.meta.requestStatus === 'fulfilled') {
+        navigate(RoutePath.INDEX);
+      }
+    });
   };
 
   return (
@@ -85,7 +95,7 @@ function SignIn(): JSX.Element {
           />
           {isPasswordValidationError && <div style={validationErrorStyle}>Password must contain 3 or more letters with numbers!</div>}
         </div>
-        <button className="login__submit form__submit button" type="submit" disabled={isPasswordValidationError || isEmailValidationError}>
+        <button className="login__submit form__submit button" type="submit" disabled={isFormDisabled}>
           Sign in
         </button>
       </form>
