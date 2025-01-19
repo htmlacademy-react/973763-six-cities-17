@@ -4,11 +4,10 @@ import ErrorPage from '../../pages/error/error';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import {RoutePath} from '../../routes';
-import {AuthorizationStatus, LoadingStatus} from '../../const';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getOffersLoadingStatus, getAutorizationStatus, getFavoritesLoadingStatus} from '../../store/selectors';
+import {getAuthorizationStatus, getIsAppLoading} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
 import {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
@@ -16,15 +15,14 @@ import {fetchOffersAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offersLoadingStatus = useAppSelector(getOffersLoadingStatus);
-  const favoritesLoadingStatus = useAppSelector(getFavoritesLoadingStatus);
-  const authorizationStatus = useAppSelector(getAutorizationStatus);
+  const isLoading = useAppSelector(getIsAppLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     dispatch(fetchOffersAction());
   }, [dispatch, authorizationStatus]);
 
-  if (offersLoadingStatus === LoadingStatus.NotLoaded || offersLoadingStatus === LoadingStatus.Loading || favoritesLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN) {
+  if (isLoading) {
     return (
       <Spinner />
     );
