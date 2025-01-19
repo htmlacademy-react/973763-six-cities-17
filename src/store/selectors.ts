@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import {State} from './types.ts';
 import {getOffersByCity, getOffersBySortOption} from '../utils';
+import {AuthorizationStatus} from '../const';
 
 export const getOffers = (state: State) => state.offers;
 export const getOffersLoadingStatus = (state: State) => state.offersLoadingStatus;
@@ -10,6 +11,11 @@ export const getActiveCityName = (state: State) => state.activeCityName;
 export const getSortOption = (state: State) => state.offerSortOption;
 export const getAutorizationStatus = (state: State) => state.authorizationStatus;
 export const getUserData = (state: State) => state.userData;
+
+export const getIsAuthed = createSelector(
+  getAutorizationStatus,
+  (autorizationStatus) => autorizationStatus === AuthorizationStatus.AUTH
+);
 
 export const getSortedOffers = createSelector(
   [getOffers, getActiveCityName, getSortOption],
