@@ -26,6 +26,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOffersAction.rejected, (state) => {
       state.offersLoadingStatus = LoadingStatus.Failed;
+      state.offers = [];
     })
     .addCase(fetchFavoritesAction.pending, (state) => {
       state.favoritesLoadingStatus = LoadingStatus.Loading;

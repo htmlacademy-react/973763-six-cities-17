@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import {useRef, ChangeEvent, FormEvent, useState} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useNavigate} from 'react-router-dom';
@@ -5,6 +6,8 @@ import {PasswordLength} from '../../const';
 import {regexForEmail, regexForPassword} from '../../utils';
 import {RoutePath} from '../../routes';
 import {loginAction} from '../../store/api-actions';
+import {useAppSelector} from '../../store/use-app-selector';
+import {getIsAuthed} from '../../store/selectors';
 
 const validationErrorStyle: React.CSSProperties = {
   position: 'absolute',
@@ -15,14 +18,21 @@ const validationErrorStyle: React.CSSProperties = {
 };
 
 function SignIn(): JSX.Element {
+  const navigate = useNavigate();
+  const isAuthed = useAppSelector(getIsAuthed);
+
+  useEffect(() => {
+    if (isAuthed) {
+      navigate(RoutePath.INDEX);
+    }
+  }, [isAuthed, navigate]);
+
+  const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [isPasswordValidationError, setPasswordValidationErrorStatus] = useState<boolean>(false);
   const [isEmailValidationError, setEmailValidationErrorStatus] = useState<boolean>(false);
   const [isFormDisabled, setFormDisabledStatus] = useState<boolean>(false);
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const isEmailInvalid = (email: string) => !regexForEmail.test(email);
   const isPasswordInvalid = (password: string) => password.length <= PasswordLength.MIN || !regexForPassword.test(password);
