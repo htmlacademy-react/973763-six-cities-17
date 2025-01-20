@@ -23,3 +23,5 @@ export const regexForPassword = new RegExp(/(?=.*[0-9])(?=.*[a-z])/);
 export const regexForEmail = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
 export const getRandomArrayElement = <T>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
+
+export const formatRating = (rating: number) => String(Math.round(rating) * 20);

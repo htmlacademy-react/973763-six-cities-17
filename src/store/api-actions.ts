@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from './types.ts';
-import {Offer, AuthData, UserData} from '../types';
+import {Offer, AuthData, UserData, OfferDetail, Review} from '../types';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute} from '../const';
 
@@ -23,6 +23,30 @@ export const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, AsyncTh
   'data/fetchFavorites',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+    return data;
+  },
+);
+
+export const fetchOfferAction = createAsyncThunk<OfferDetail, string | undefined, AsyncThunkApiType>(
+  'data/fetchOffer',
+  async (id, { extra: api }) => {
+    const { data } = await api.get<OfferDetail>(`${APIRoute.Offers}/${id}`);
+    return data;
+  },
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string | undefined, AsyncThunkApiType>(
+  'data/fetchNearby',
+  async (id, { extra: api }) => {
+    const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}${APIRoute.Nearby}`);
+    return data;
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk<Review[], string | undefined, AsyncThunkApiType>(
+  'data/fetchReviews',
+  async (id, { extra: api }) => {
+    const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
     return data;
   },
 );

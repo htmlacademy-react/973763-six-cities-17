@@ -1,5 +1,5 @@
 import { store } from '../store';
-import {CityName, SortType, Offer, UserData} from '../types';
+import {CityName, SortType, Offer, UserData, OfferDetail, Review} from '../types';
 import {LoadingStatus, AuthorizationStatus} from '../const';
 
 export type State = ReturnType<typeof store.getState>;
@@ -15,4 +15,10 @@ export type InitialState = {
   offerSortOption: SortType;
   authorizationStatus: AuthorizationStatus;
   userData: UserData | null;
+  offer: OfferDetail | null;
+  offerLoadingStatus: LoadingStatus;
+  nearbyOffers: Offer[];
+  nearbyOffersLoadingStatus: LoadingStatus;
+  reviews: Review[];
+  reviewsLoadingStatus: LoadingStatus;
 }

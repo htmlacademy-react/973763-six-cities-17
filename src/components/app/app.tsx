@@ -12,6 +12,7 @@ import Spinner from '../../components/spinner/spinner';
 import {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {fetchOffersAction} from '../../store/api-actions';
+import {AuthorizationStatus} from '../../const';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,7 +20,10 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
-    dispatch(fetchOffersAction());
+    if (authorizationStatus !== AuthorizationStatus.UNKNOWN) {
+      dispatch(fetchOffersAction());
+    }
+
   }, [dispatch, authorizationStatus]);
 
   if (isLoading) {

@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {setActiveCityName, changeOfferSortOption} from './action';
 import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION, LoadingStatus, AuthorizationStatus} from '../const';
 import {InitialState} from './types.ts';
-import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, loginAction, logoutAction} from './api-actions';
+import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, fetchReviewsAction, fetchNearbyOffersAction, fetchOfferAction, loginAction, logoutAction} from './api-actions';
 
 const initialState: InitialState = {
   offers: [],
@@ -13,6 +13,12 @@ const initialState: InitialState = {
   offerSortOption: DEFAULT_SORT_OPTION,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   userData: null,
+  offer: null,
+  offerLoadingStatus: LoadingStatus.NotLoaded,
+  nearbyOffers: [],
+  nearbyOffersLoadingStatus: LoadingStatus.NotLoaded,
+  reviews: [],
+  reviewsLoadingStatus: LoadingStatus.NotLoaded
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -55,6 +61,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(checkAuthAction.rejected, (state) => {
       state.authorizationStatus = AuthorizationStatus.NO_AUTH;
     })
+    .addCase(loginAction.pending, (state) => {
+      state.authorizationStatus = AuthorizationStatus.UNKNOWN;
+    })
     .addCase(loginAction.fulfilled, (state, action) => {
       state.authorizationStatus = AuthorizationStatus.AUTH;
       state.userData = action.payload;
@@ -67,6 +76,42 @@ const reducer = createReducer(initialState, (builder) => {
       state.userData = null;
       state.favoriteOffers = [];
       state.favoritesLoadingStatus = LoadingStatus.NotLoaded;
+    })
+
+    .addCase(fetchOfferAction.pending, (state) => {
+      state.offerLoadingStatus = LoadingStatus.Loading;
+    })
+    .addCase(fetchOfferAction.fulfilled, (state, action) => {
+      state.offer = action.payload;
+      state.offerLoadingStatus = LoadingStatus.Loaded;
+    })
+    .addCase(fetchOfferAction.rejected, (state) => {
+      state.offerLoadingStatus = LoadingStatus.Failed;
+      state.offer = null;
+    })
+
+    .addCase(fetchNearbyOffersAction.pending, (state) => {
+      state.nearbyOffersLoadingStatus = LoadingStatus.Loading;
+    })
+    .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
+      state.nearbyOffers = action.payload;
+      state.nearbyOffersLoadingStatus = LoadingStatus.Loaded;
+    })
+    .addCase(fetchNearbyOffersAction.rejected, (state) => {
+      state.nearbyOffersLoadingStatus = LoadingStatus.Failed;
+      state.nearbyOffers = [];
+    })
+
+    .addCase(fetchReviewsAction.pending, (state) => {
+      state.reviewsLoadingStatus = LoadingStatus.Loading;
+    })
+    .addCase(fetchReviewsAction.fulfilled, (state, action) => {
+      state.reviews = action.payload;
+      state.reviewsLoadingStatus = LoadingStatus.Loaded;
+    })
+    .addCase(fetchReviewsAction.rejected, (state) => {
+      state.reviewsLoadingStatus = LoadingStatus.Failed;
+      state.reviews = [];
     });
 });
 

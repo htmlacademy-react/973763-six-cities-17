@@ -7,7 +7,7 @@ function GalleryItem({src}: GalleryItemProps): JSX.Element {
     <div className="offer__image-wrapper">
       <img
         className="offer__image"
-        src={`${src}`}
+        src={src}
         alt="Photo studio"
       />
     </div>

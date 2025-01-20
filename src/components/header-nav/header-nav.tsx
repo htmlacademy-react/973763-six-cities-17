@@ -19,7 +19,7 @@ function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isAuthed && (favoritesLoadingStatus === LoadingStatus.NotLoaded)) {
+    if (isAuthed && favoritesLoadingStatus === LoadingStatus.NotLoaded) {
       dispatch(fetchFavoritesAction());
     }
   }, [dispatch, favoritesLoadingStatus, isAuthed]);
