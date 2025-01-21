@@ -4,6 +4,10 @@ const CITIES_NAMES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'D
 
 const DEFAULT_CITY_NAME: CityName = CITIES_NAMES[0];
 
+const NEARBY_OFFERS_OM_MAP_MAX_COUNT: number = 3;
+
+const REVIEWS_OM_PAGE_MAX_COUNT: number = 3;
+
 const SortOptions: SortType[] = [
   {
     name: 'Popular',
@@ -114,4 +118,4 @@ const RatingTitles = [
 ];
 
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles};
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles};

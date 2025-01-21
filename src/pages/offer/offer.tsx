@@ -1,7 +1,7 @@
 import CardList from '../../components/card-list/card-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
-import {CardType} from '../../const';
+import {CardType, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT} from '../../const';
 import Gallery from '../../components/gallery/gallery';
 import Feedback from '../../components/feedback/feedback';
 import ReviewsList from '../../components/reviews-list/reviews-list';
@@ -32,14 +32,12 @@ function Offer(): JSX.Element {
 
   const isAuthed = useAppSelector(getIsAuthed);
   const isLoading = useAppSelector(getIsOfferPageLoading);
-  const nearByOffers = useAppSelector(getNearbyOffers).slice(0, 3);
-  const reviews = useAppSelector(getSortedReviews).slice(0, 10);
+  const nearByOffers = useAppSelector(getNearbyOffers).slice(0, NEARBY_OFFERS_OM_MAP_MAX_COUNT);
+  const reviews = useAppSelector(getSortedReviews).slice(0, REVIEWS_OM_PAGE_MAX_COUNT);
   const mapOffers = offer === null ? [] : [offer, ...nearByOffers];
 
   if (isLoading) {
-    return (
-      <Spinner />
-    );
+    return <Spinner />;
   }
 
   if (offer !== null) {

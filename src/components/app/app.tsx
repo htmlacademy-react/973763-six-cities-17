@@ -23,9 +23,7 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   if (isLoading) {
-    return (
-      <Spinner />
-    );
+    return <Spinner />;
   }
 
   const router = createBrowserRouter(

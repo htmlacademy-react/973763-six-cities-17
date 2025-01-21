@@ -11,6 +11,7 @@ import {LoadingStatus} from '../../const';
 import React, {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {fetchFavoritesAction, logoutAction} from '../../store/api-actions';
+import Spinner from '../spinner/spinner';
 
 function HeaderNav(): JSX.Element {
   const userData = useAppSelector(getUserData);
@@ -25,6 +26,11 @@ function HeaderNav(): JSX.Element {
   }, [dispatch, favoritesLoadingStatus, isAuthed]);
 
   const favoritesCount = useAppSelector(getFavoriteOffers).length;
+  const isLoading = favoritesLoadingStatus === LoadingStatus.Loading;
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();

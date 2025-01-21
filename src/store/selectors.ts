@@ -24,13 +24,13 @@ export const getIsAuthed = createSelector(
 );
 
 export const getIsAppLoading = createSelector(
-  [getOffersLoadingStatus, getFavoritesLoadingStatus, getAuthorizationStatus],
-  (offersLoadingStatus, favoritesLoadingStatus, authorizationStatus) => offersLoadingStatus === LoadingStatus.NotLoaded || offersLoadingStatus === LoadingStatus.Loading || favoritesLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN
+  [getOffersLoadingStatus, getAuthorizationStatus],
+  (offersLoadingStatus, authorizationStatus) => offersLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN
 );
 
 export const getIsOfferPageLoading = createSelector(
   [getOfferLoadingStatus, getNearbyOffersLoadingStatus, getReviewsLoadingStatus],
-  (offerLoadingStatus, nearbyOffersLoadingStatus, reviewsLoadingStatus) => offerLoadingStatus === LoadingStatus.NotLoaded || offerLoadingStatus === LoadingStatus.Loading || nearbyOffersLoadingStatus === LoadingStatus.Loading || reviewsLoadingStatus === LoadingStatus.Loading
+  (offerLoadingStatus, nearbyOffersLoadingStatus, reviewsLoadingStatus) => offerLoadingStatus === LoadingStatus.Loading || nearbyOffersLoadingStatus === LoadingStatus.Loading || reviewsLoadingStatus === LoadingStatus.Loading
 );
 
 export const getSortedOffers = createSelector(
