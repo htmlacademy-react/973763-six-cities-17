@@ -24,14 +24,11 @@ function Offer(): JSX.Element {
   useScrollToTop();
 
   useEffect(() => {
-    dispatch(fetchOfferAction(offerId)).then((response)=> {
-      if (response.meta.requestStatus === 'fulfilled') {
-        dispatch(fetchReviewsAction(offerId));
-        dispatch(fetchNearbyOffersAction(offerId));
-      }
+    dispatch(fetchOfferAction(offerId)).unwrap().then(()=> {
+      dispatch(fetchReviewsAction(offerId));
+      dispatch(fetchNearbyOffersAction(offerId));
     });
   }, [dispatch, offerId]);
-
 
   const isAuthed = useAppSelector(getIsAuthed);
   const isLoading = useAppSelector(getIsOfferPageLoading);

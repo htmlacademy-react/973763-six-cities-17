@@ -90,4 +90,28 @@ enum LoadingStatus {
   Failed = 'failed'
 }
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus};
+const RatingTitles = [
+  {
+    title: 'perfect',
+    value: 5
+  },
+  {
+    title: 'good',
+    value: 4
+  },
+  {
+    title: 'not bad',
+    value: 3
+  },
+  {
+    title: 'badly',
+    value: 2
+  },
+  {
+    title: 'terribly',
+    value: 1
+  },
+];
+
+
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles};

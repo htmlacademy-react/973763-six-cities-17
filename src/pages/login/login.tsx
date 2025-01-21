@@ -1,16 +1,27 @@
 import Header from '../../components/header/header';
 import SignIn from '../../components/sign-in/sign-in';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../routes';
 import {setActiveCityName} from '../../store/action';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {getRandomArrayElement} from '../../utils';
 import { CITIES_NAMES} from '../../const';
 import { CityName } from '../../types';
+import {useAppSelector} from '../../store/use-app-selector';
+import {getIsAuthed} from '../../store/selectors';
+import {useEffect} from 'react';
 
 function Login(): JSX.Element {
   const randomCityName = getRandomArrayElement<CityName>(CITIES_NAMES);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const isAuthed = useAppSelector(getIsAuthed);
+
+  useEffect(() => {
+    if (isAuthed) {
+      navigate(RoutePath.INDEX);
+    }
+  }, [isAuthed, navigate]);
 
   return (
     <div className="page page--gray page--login">

@@ -19,12 +19,16 @@ function App(): JSX.Element {
   const isLoading = useAppSelector(getIsAppLoading);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  useEffect(() => {
-    if (authorizationStatus !== AuthorizationStatus.UNKNOWN) {
-      dispatch(fetchOffersAction());
-    }
+  // useEffect(() => {
+  //   if (authorizationStatus !== AuthorizationStatus.UNKNOWN) {
+  //     dispatch(fetchOffersAction());
+  //   }
+  //
+  // }, [dispatch, authorizationStatus]);
 
-  }, [dispatch, authorizationStatus]);
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, [dispatch]);
 
   if (isLoading) {
     return (
