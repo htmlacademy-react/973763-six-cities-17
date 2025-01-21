@@ -1,4 +1,4 @@
-import {CityName, Offer, SortType} from './types';
+import {CityName, Offer, SortType, Review} from './types';
 
 export const getOffersByCity = (offers: Offer[], filterType: CityName) => offers.filter((offer) => offer.city.name === filterType);
 
@@ -18,6 +18,8 @@ export const getOffersBySortOption = (offers: Offer[], sortOption: SortType) => 
     default: return offers;
   }
 };
+
+export const getReviewsByDate = (reviews: Review[]) => reviews.toSorted((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
 export const regexForPassword = new RegExp(/(?=.*[0-9])(?=.*[a-z])/);
 export const regexForEmail = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);

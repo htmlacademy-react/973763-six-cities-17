@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import {State} from './types.ts';
-import {getOffersByCity, getOffersBySortOption} from '../utils';
+import {getOffersByCity, getOffersBySortOption, getReviewsByDate} from '../utils';
 import {AuthorizationStatus, LoadingStatus} from '../const';
 
 export const getOffers = (state: State) => state.offers;
@@ -39,4 +39,9 @@ export const getSortedOffers = createSelector(
     const filteredOffersByActiveCity = getOffersByCity(offers, activeCityName);
     return getOffersBySortOption(filteredOffersByActiveCity, sortOption);
   }
+);
+
+export const getSortedReviews = createSelector(
+  getReviews,
+  (reviews) => getReviewsByDate(reviews)
 );

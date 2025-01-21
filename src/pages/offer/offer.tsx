@@ -7,7 +7,7 @@ import Feedback from '../../components/feedback/feedback';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getIsAuthed, getOffer, getIsOfferPageLoading, getNearbyOffers, getReviews} from '../../store/selectors';
+import {getIsAuthed, getOffer, getIsOfferPageLoading, getNearbyOffers, getSortedReviews} from '../../store/selectors';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useEffect} from 'react';
 import {fetchOfferAction, fetchNearbyOffersAction, fetchReviewsAction} from '../../store/api-actions';
@@ -33,7 +33,7 @@ function Offer(): JSX.Element {
   const isAuthed = useAppSelector(getIsAuthed);
   const isLoading = useAppSelector(getIsOfferPageLoading);
   const nearByOffers = useAppSelector(getNearbyOffers).slice(0, 3);
-  const reviews = useAppSelector(getReviews);
+  const reviews = useAppSelector(getSortedReviews).slice(0, 10);
   const mapOffers = offer === null ? [] : [offer, ...nearByOffers];
 
   if (isLoading) {
