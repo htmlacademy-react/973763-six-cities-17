@@ -1,24 +1,28 @@
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../routes';
-import {getAutorizationStatus, getUserData, getFavoritesLoadingStatus, getFavoriteOffers} from '../../store/selectors';
+import {
+  getUserData,
+  getFavoritesLoadingStatus,
+  getFavoriteOffers,
+  getIsAuthed
+} from '../../store/selectors';
 import {useAppSelector} from '../../store/use-app-selector';
-import {AuthorizationStatus, LoadingStatus} from '../../const';
+import {LoadingStatus} from '../../const';
 import React, {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {fetchFavoritesAction, logoutAction} from '../../store/api-actions';
 
 function HeaderNav(): JSX.Element {
   const userData = useAppSelector(getUserData);
-  const authorizationStatus = useAppSelector(getAutorizationStatus);
   const favoritesLoadingStatus = useAppSelector(getFavoritesLoadingStatus);
-  const isAuthed = authorizationStatus === AuthorizationStatus.AUTH;
+  const isAuthed = useAppSelector(getIsAuthed);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.AUTH && (favoritesLoadingStatus === LoadingStatus.NotLoaded || favoritesLoadingStatus === LoadingStatus.Failed)) {
+    if (isAuthed && favoritesLoadingStatus === LoadingStatus.NotLoaded) {
       dispatch(fetchFavoritesAction());
     }
-  }, [dispatch, favoritesLoadingStatus, authorizationStatus]);
+  }, [dispatch, favoritesLoadingStatus, isAuthed]);
 
   const favoritesCount = useAppSelector(getFavoriteOffers).length;
 

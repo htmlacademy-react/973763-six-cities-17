@@ -1,7 +1,6 @@
 import {Navigate} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
 import {RoutePath} from '../../routes';
-import {getAutorizationStatus} from '../../store/selectors';
+import {getIsAuthed} from '../../store/selectors';
 import {useAppSelector} from '../../store/use-app-selector';
 
 type PrivateRouteProps = {
@@ -10,12 +9,10 @@ type PrivateRouteProps = {
 }
 
 function PrivateRoute({navigatePath, children}: PrivateRouteProps): JSX.Element {
-  const authorizationStatus = useAppSelector(getAutorizationStatus);
+  const isAuthed = useAppSelector(getIsAuthed);
 
   return (
-    authorizationStatus === AuthorizationStatus.AUTH
-      ? children
-      : <Navigate to={navigatePath} />
+    isAuthed ? children : <Navigate to={navigatePath} />
   );
 }
 

@@ -27,6 +27,12 @@ type Review = {
   rating: number;
 }
 
+type ReviewFormData = {
+  id: string;
+  comment: string;
+  rating: number;
+}
+
 type Location = {
   latitude: number;
   longitude: number;
@@ -65,4 +71,4 @@ type SortType = {
   value: string;
 };
 
-export type {UserData, AuthData, Offer, OfferDetail, SortType, Review, CityLocation, CityName};
+export type {UserData, AuthData, Offer, OfferDetail, SortType, Review, ReviewFormData, CityLocation, CityName};

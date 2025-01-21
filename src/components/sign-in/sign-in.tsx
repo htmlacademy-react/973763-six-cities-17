@@ -1,3 +1,4 @@
+import React from 'react';
 import {useRef, ChangeEvent, FormEvent, useState} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useNavigate} from 'react-router-dom';
@@ -15,14 +16,13 @@ const validationErrorStyle: React.CSSProperties = {
 };
 
 function SignIn(): JSX.Element {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [isPasswordValidationError, setPasswordValidationErrorStatus] = useState<boolean>(false);
   const [isEmailValidationError, setEmailValidationErrorStatus] = useState<boolean>(false);
-  const [isFormDisabled, setFormDisabledStatus] = useState<boolean>(false);
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isEmailInvalid = (email: string) => !regexForEmail.test(email);
   const isPasswordInvalid = (password: string) => password.length <= PasswordLength.MIN || !regexForPassword.test(password);
@@ -30,20 +30,16 @@ function SignIn(): JSX.Element {
   const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (isEmailInvalid(evt.target.value)) {
       setEmailValidationErrorStatus(true);
-      setFormDisabledStatus(true);
     } else {
       setEmailValidationErrorStatus(false);
-      setFormDisabledStatus(false);
     }
   };
 
   const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (isPasswordInvalid(evt.target.value)) {
       setPasswordValidationErrorStatus(true);
-      setFormDisabledStatus(true);
     } else {
       setPasswordValidationErrorStatus(false);
-      setFormDisabledStatus(false);
     }
   };
 
@@ -53,16 +49,14 @@ function SignIn(): JSX.Element {
       return;
     }
 
-    setFormDisabledStatus(true);
+    setIsSubmitting(true);
     dispatch(loginAction({
       email: loginRef.current.value,
       password: passwordRef.current.value
-    })).then((response)=> {
-      setFormDisabledStatus(false);
-      if (response.meta.requestStatus === 'fulfilled') {
-        navigate(RoutePath.INDEX);
-      }
-    });
+    })).unwrap().then(() => navigate(RoutePath.INDEX))
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -79,6 +73,7 @@ function SignIn(): JSX.Element {
             placeholder="Email"
             required
             onChange={handleEmailChange}
+            disabled={isSubmitting}
           />
           {isEmailValidationError && <div style={validationErrorStyle}>Email must match example@example.com!</div>}
         </div>
@@ -92,10 +87,11 @@ function SignIn(): JSX.Element {
             placeholder="Password"
             required
             onChange={handlePasswordChange}
+            disabled={isSubmitting}
           />
           {isPasswordValidationError && <div style={validationErrorStyle}>Password must contain 3 or more letters with numbers!</div>}
         </div>
-        <button className="login__submit form__submit button" type="submit" disabled={isFormDisabled}>
+        <button className="login__submit form__submit button" type="submit" disabled={isPasswordValidationError || isEmailValidationError || isSubmitting}>
           Sign in
         </button>
       </form>
