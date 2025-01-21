@@ -1,10 +1,14 @@
 import {Review} from '../../types';
+import {formatRating, formatDateToString} from '../../utils';
 
 type ReviewsItemProps = {
   review: Review;
 }
 
 function ReviewsItem({review}: ReviewsItemProps): JSX.Element {
+  const ratingInStarsFormat: string = formatRating(review.rating);
+  const reviewDateLabel = formatDateToString(new Date(review.date));
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -22,15 +26,15 @@ function ReviewsItem({review}: ReviewsItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}/>
+            <span style={{ width: `${ratingInStarsFormat}%` }}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">
-          {review.date}
+        <time className="reviews__time" dateTime={review.date}>
+          {reviewDateLabel}
         </time>
       </div>
     </li>

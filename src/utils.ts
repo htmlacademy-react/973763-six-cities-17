@@ -25,3 +25,5 @@ export const regexForEmail = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 export const getRandomArrayElement = <T>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
 
 export const formatRating = (rating: number) => String(Math.round(rating) * 20);
+
+export const formatDateToString = (date: Date) => `${date.toLocaleString('en', { month: 'long' })} ${date.getFullYear()}`;

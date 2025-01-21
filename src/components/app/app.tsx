@@ -7,24 +7,16 @@ import {RoutePath} from '../../routes';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getAuthorizationStatus, getIsAppLoading} from '../../store/selectors';
+import {getIsAppLoading} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
 import {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {fetchOffersAction} from '../../store/api-actions';
-import {AuthorizationStatus} from '../../const';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(getIsAppLoading);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
-  // useEffect(() => {
-  //   if (authorizationStatus !== AuthorizationStatus.UNKNOWN) {
-  //     dispatch(fetchOffersAction());
-  //   }
-  //
-  // }, [dispatch, authorizationStatus]);
 
   useEffect(() => {
     dispatch(fetchOffersAction());
