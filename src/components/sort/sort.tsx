@@ -2,22 +2,21 @@ import {SortOptions} from '../../const';
 import {SortType} from '../../types';
 import {useState} from 'react';
 import { useAppDispatch } from '../../store/use-app-dispatch';
-import {changeOfferSortOption} from '../../store/action';
+import {setOfferSortOption} from '../../store/action';
+import {useAppSelector} from '../../store/use-app-selector';
+import {getSortOption} from '../../store/selectors';
 
-type SortProps = {
-  sortOption: SortType;
-}
-
-function Sort({sortOption}: SortProps): JSX.Element {
+function Sort(): JSX.Element {
   const [isBlockOpened, setBlockState] = useState(false);
   const handleOpenSortBlock = () => {
     setBlockState(!isBlockOpened);
   };
 
   const dispatch = useAppDispatch();
+  const sortOption = useAppSelector(getSortOption);
 
   const handleSortClick = (sortType: SortType) => {
-    dispatch(changeOfferSortOption(sortType));
+    dispatch(setOfferSortOption(sortType));
     setBlockState(false);
   };
 
@@ -25,8 +24,8 @@ function Sort({sortOption}: SortProps): JSX.Element {
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={handleOpenSortBlock}>
-        {sortOption.value}
-        <svg className="places__sorting-arrow" width="{7}" height="{4}">
+        &nbsp;{sortOption.value}
+        <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
       </span>

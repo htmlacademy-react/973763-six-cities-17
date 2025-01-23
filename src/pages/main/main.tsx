@@ -6,21 +6,14 @@ import Sort from '../../components/sort/sort';
 import {CardType, CITIES_NAMES} from '../../const';
 import {useState} from 'react';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getActiveCityName, getSortOption, getSortedOffers} from '../../store/selectors';
+import {getActiveCityName, getSortedOffers} from '../../store/selectors';
 
 function Main(): JSX.Element {
 
   const activeCityName = useAppSelector(getActiveCityName);
-  const sortOption = useAppSelector(getSortOption);
   const sortedOffers = useAppSelector(getSortedOffers);
   const hasOfferData = sortedOffers.length > 0;
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-
-  const handleActiveOfferChange = (id: string | null): void => {
-    if (activeOfferId !== id) {
-      setActiveOfferId(id);
-    }
-  };
 
   return (
     <div className="page page--gray page--main">
@@ -38,9 +31,9 @@ function Main(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{sortedOffers.length} places to stay in {activeCityName}</b>
-                <Sort sortOption={sortOption} />
+                <Sort/>
                 <div className="cities__places-list places__list tabs__content">
-                  <CardList cards={sortedOffers} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={handleActiveOfferChange}/>
+                  <CardList cards={sortedOffers} isFavorites={false} cardType={CardType.Cities} onActiveOfferChange={setActiveOfferId}/>
                 </div>
               </section>
               <div className="cities__right-section">

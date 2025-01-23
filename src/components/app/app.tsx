@@ -7,20 +7,28 @@ import {RoutePath} from '../../routes';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getIsAppLoading} from '../../store/selectors';
+import {getFavoritesLoadingStatus, getIsAppLoading, getIsAuthed} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
 import {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
-import {fetchOffersAction} from '../../store/api-actions';
-
+import {fetchFavoritesAction, fetchOffersAction} from '../../store/api-actions';
+import {LoadingStatus} from '../../const';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(getIsAppLoading);
+  const favoritesLoadingStatus = useAppSelector(getFavoritesLoadingStatus);
+  const isAuthed = useAppSelector(getIsAuthed);
 
   useEffect(() => {
     dispatch(fetchOffersAction());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuthed && favoritesLoadingStatus === LoadingStatus.NotLoaded) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [dispatch, favoritesLoadingStatus, isAuthed]);
 
   if (isLoading) {
     return <Spinner />;

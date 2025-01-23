@@ -24,8 +24,8 @@ export const getIsAuthed = createSelector(
 );
 
 export const getIsAppLoading = createSelector(
-  [getOffersLoadingStatus, getAuthorizationStatus],
-  (offersLoadingStatus, authorizationStatus) => offersLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN
+  [getOffersLoadingStatus, getAuthorizationStatus, getFavoritesLoadingStatus],
+  (offersLoadingStatus, authorizationStatus, favoritesLoadingStatus) => offersLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN || favoritesLoadingStatus === LoadingStatus.Loading
 );
 
 export const getIsOfferPageLoading = createSelector(

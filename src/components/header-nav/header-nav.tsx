@@ -1,36 +1,16 @@
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../routes';
-import {
-  getUserData,
-  getFavoritesLoadingStatus,
-  getFavoriteOffers,
-  getIsAuthed
-} from '../../store/selectors';
+import {getUserData, getFavoriteOffers, getIsAuthed} from '../../store/selectors';
 import {useAppSelector} from '../../store/use-app-selector';
-import {LoadingStatus} from '../../const';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
-import {fetchFavoritesAction, logoutAction} from '../../store/api-actions';
-import Spinner from '../spinner/spinner';
+import {logoutAction} from '../../store/api-actions';
 
 function HeaderNav(): JSX.Element {
   const userData = useAppSelector(getUserData);
-  const favoritesLoadingStatus = useAppSelector(getFavoritesLoadingStatus);
   const isAuthed = useAppSelector(getIsAuthed);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (isAuthed && favoritesLoadingStatus === LoadingStatus.NotLoaded) {
-      dispatch(fetchFavoritesAction());
-    }
-  }, [dispatch, favoritesLoadingStatus, isAuthed]);
-
   const favoritesCount = useAppSelector(getFavoriteOffers).length;
-  const isLoading = favoritesLoadingStatus === LoadingStatus.Loading;
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();

@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setActiveCityName, changeOfferSortOption} from './action';
+import {setActiveCityName, setOfferSortOption} from './action';
 import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION, LoadingStatus, AuthorizationStatus} from '../const';
 import {InitialState} from './types.ts';
 import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, fetchReviewsAction, fetchNearbyOffersAction, fetchOfferAction, loginAction, logoutAction} from './api-actions';
@@ -48,7 +48,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setActiveCityName, (state, action) => {
       state.activeCityName = action.payload;
     })
-    .addCase(changeOfferSortOption, (state, action) => {
+    .addCase(setOfferSortOption, (state, action) => {
       state.offerSortOption = action.payload;
     })
     .addCase(checkAuthAction.pending, (state) => {
