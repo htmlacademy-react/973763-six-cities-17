@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setActiveCityName, setOfferSortOption} from './action';
+// import {setActiveCityName, setOfferSortOption} from './action';
 import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION, LoadingStatus, AuthorizationStatus} from '../const';
 import {InitialState} from './types.ts';
 import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, toggleFavoriteAction, fetchReviewsAction, fetchNearbyOffersAction, fetchOfferAction, loginAction, logoutAction} from './api-actions';
@@ -61,12 +61,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(toggleFavoriteAction.rejected, (state) => {
       state.favoritesToggleStatus = LoadingStatus.Failed;
     })
-    .addCase(setActiveCityName, (state, action) => {
-      state.activeCityName = action.payload;
-    })
-    .addCase(setOfferSortOption, (state, action) => {
-      state.offerSortOption = action.payload;
-    })
+    // .addCase(setActiveCityName, (state, action) => {
+    //   state.activeCityName = action.payload;
+    // })
+    // .addCase(setOfferSortOption, (state, action) => {
+    //   state.offerSortOption = action.payload;
+    // })
     .addCase(checkAuthAction.pending, (state) => {
       state.authorizationStatus = AuthorizationStatus.UNKNOWN;
     })

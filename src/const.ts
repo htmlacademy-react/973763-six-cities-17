@@ -117,5 +117,12 @@ const RatingTitles = [
   },
 ];
 
+const NameSpace = {
+  App: 'APP',
+  Offer: 'OFFER',
+  Review: 'REVIEW',
+  User: 'USER',
+} as const;
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles};
+
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles, NameSpace};

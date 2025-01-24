@@ -6,6 +6,11 @@ export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
+export type AppState = {
+  activeCityName: CityName;
+  offerSortOption: SortType;
+}
+
 export type InitialState = {
   offers: Offer[];
   offersLoadingStatus: LoadingStatus;
