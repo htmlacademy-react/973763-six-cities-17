@@ -1,6 +1,5 @@
 import LocationItem from '../../components/location-item/location-item';
 import {CityName, Offer} from '../../types';
-import {getOffersByCity} from '../../utils.ts';
 
 type LocationsListProps = {
   IsFavorites: boolean;
@@ -13,7 +12,7 @@ function LocationsList({IsFavorites, cities, offers, activeCityName}: LocationsL
 
   return (
     <ul className={`${IsFavorites ? 'favorites__list' : 'locations__list tabs__list'}`}>
-      {cities.map((cityName) => <LocationItem isFavorites={IsFavorites} isActive={cityName === activeCityName} cityName={cityName} offers={offers && getOffersByCity(offers, cityName)} key={cityName}/>)}
+      {cities.map((cityName) => <LocationItem isFavorites={IsFavorites} isActive={cityName === activeCityName} cityName={cityName} offers={offers} key={cityName}/>)}
     </ul>
   );
 }

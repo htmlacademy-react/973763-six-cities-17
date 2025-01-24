@@ -1,6 +1,7 @@
 import CardList from '../card-list/card-list';
 import {CityName, Offer} from '../../types';
 import {CardType} from '../../const';
+import {getOffersByCity} from '../../utils';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {setActiveCityName} from '../../store/action';
@@ -14,6 +15,7 @@ type LocationItemProps = {
 
 function LocationItem({cityName, isFavorites, offers, isActive}: LocationItemProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const offersByCity = offers && getOffersByCity(offers, cityName);
 
   return (
     <li className={`${isFavorites ? 'favorites__locations-items' : 'locations__item'}`}>
@@ -28,7 +30,7 @@ function LocationItem({cityName, isFavorites, offers, isActive}: LocationItemPro
               </div>
             </div>
             <div className="favorites__places">
-              {offers && <CardList cards={offers} isFavorites cardType={CardType.Favorites}/>}
+              {offersByCity && <CardList cards={offersByCity} isFavorites cardType={CardType.Favorites}/>}
             </div>
           </>
           :

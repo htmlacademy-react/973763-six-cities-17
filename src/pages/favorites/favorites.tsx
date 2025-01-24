@@ -7,14 +7,13 @@ import {getFavoriteOffers, getFavoritesCities} from '../../store/selectors';
 function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
   const favoriteCities = useAppSelector(getFavoritesCities);
-  const hasOfferData = favoriteOffers.length > 0;
 
   return (
-    <div className={`page ${hasOfferData ? '' : 'page--favorites-empty'}`}>
+    <div className={`page ${favoriteOffers.length ? '' : 'page--favorites-empty'}`}>
       <Header hasNavigation/>
 
-      <main className={`page__main page__main--favorites ${hasOfferData ? '' : 'page__main--favorites-empty'}`}>
-        {hasOfferData ?
+      <main className={`page__main page__main--favorites ${favoriteOffers.length ? '' : 'page__main--favorites-empty'}`}>
+        {favoriteOffers.length ?
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
