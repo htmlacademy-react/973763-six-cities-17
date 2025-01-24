@@ -2,8 +2,6 @@ import {CityName, Offer, SortType, Review} from './types';
 
 export const getOffersByCity = (offers: Offer[], filterType: CityName) => offers.filter((offer) => offer.city.name === filterType);
 
-export const getFavoritesCities = (offers: Offer[]) => [...new Set(offers.map((offer) => offer.city.name))];
-
 export const getOffersBySortOption = (offers: Offer[], sortOption: SortType) => {
   switch (sortOption.name) {
     case 'Popular':

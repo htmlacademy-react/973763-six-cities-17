@@ -11,6 +11,7 @@ export type InitialState = {
   offersLoadingStatus: LoadingStatus;
   favoriteOffers: Offer[];
   favoritesLoadingStatus: LoadingStatus;
+  favoritesToggleStatus: LoadingStatus;
   activeCityName: CityName;
   offerSortOption: SortType;
   authorizationStatus: AuthorizationStatus;

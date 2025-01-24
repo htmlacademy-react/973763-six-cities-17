@@ -17,6 +17,7 @@ export const getNearbyOffers = (state: State) => state.nearbyOffers;
 export const getNearbyOffersLoadingStatus = (state: State) => state.nearbyOffersLoadingStatus;
 export const getReviews = (state: State) => state.reviews;
 export const getReviewsLoadingStatus = (state: State) => state.reviewsLoadingStatus;
+export const getFavoriteStatusByOfferId = (state: State, id: string) => state.favoriteOffers.findIndex((offer) => offer.id === id) !== -1;
 
 export const getIsAuthed = createSelector(
   getAuthorizationStatus,
@@ -44,4 +45,9 @@ export const getSortedOffers = createSelector(
 export const getSortedReviews = createSelector(
   getReviews,
   (reviews) => getReviewsByDate(reviews)
+);
+
+export const getFavoritesCities = createSelector(
+  getFavoriteOffers,
+  (favoriteOffers) => [...new Set(favoriteOffers.map((offer) => offer.city.name))]
 );

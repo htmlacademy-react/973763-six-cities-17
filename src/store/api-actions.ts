@@ -27,6 +27,22 @@ export const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, AsyncTh
   },
 );
 
+export const toggleFavoriteAction = createAsyncThunk<Offer, {offerId: string; isFavorite: boolean}, AsyncThunkApiType>(
+  'data/toggleFavoriteAction',
+  async ({ offerId, isFavorite }, {getState, extra: api }) => {
+    const newFavoriteStatus = Number(!isFavorite);
+    const { data } = await api.post<OfferDetail>(`${APIRoute.Favorite}/${offerId}/${newFavoriteStatus}`);
+    const {offers} = getState();
+    const currentOffer = offers.find((offer) => offer.id === data.id);
+
+    if (!currentOffer) {
+      throw new Error(`Failed to find offer with such id : ${data.id}`);
+    }
+
+    return {...currentOffer, isFavorite: data.isFavorite};
+  },
+);
+
 export const fetchOfferAction = createAsyncThunk<OfferDetail, string | undefined, AsyncThunkApiType>(
   'data/fetchOffer',
   async (id, { extra: api }) => {

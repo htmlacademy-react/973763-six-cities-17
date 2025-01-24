@@ -8,12 +8,11 @@ import {getActiveCityName, getSortedOffers} from '../../store/selectors';
 function Main(): JSX.Element {
   const activeCityName = useAppSelector(getActiveCityName);
   const sortedOffers = useAppSelector(getSortedOffers);
-  const hasOfferData = sortedOffers.length > 0;
 
   return (
     <div className="page page--gray page--main">
       <Header hasNavigation />
-      <main className={`page__main page__main--index ${hasOfferData ? '' : 'page__main--index-empty'}`}>
+      <main className={`page__main page__main--index ${sortedOffers.length ? '' : 'page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">

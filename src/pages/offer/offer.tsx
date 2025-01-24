@@ -15,6 +15,7 @@ import Spinner from '../../components/spinner/spinner';
 import {formatRating} from '../../utils';
 import useScrollToTop from '../../hooks/use-scroll-to-top';
 import Error from '../error/error';
+import FavoritesButton from '../../components/favorite-button/favorite-button';
 
 function Offer(): JSX.Element {
   const {id: offerId} = useParams();
@@ -40,7 +41,7 @@ function Offer(): JSX.Element {
     return <Spinner />;
   }
 
-  if (offer !== null) {
+  if (offer !== null && offerId) {
     const ratingInStarsFormat: string = formatRating(offer.rating);
     const bedroomLabel = offer.bedrooms > 1 ? `${offer.bedrooms} Bedrooms` : '1 Bedroom';
     const adultsLabel = offer.maxAdults > 1 ? `Max ${offer.maxAdults} adults` : 'Max 1 adult';
@@ -56,12 +57,7 @@ function Offer(): JSX.Element {
                 {offer.isPremium && <div className="offer__mark"><span>Premium</span></div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offer.title}</h1>
-                  <button className="offer__bookmark-button button" type="button">
-                    <svg className="offer__bookmark-icon" width={31} height={33}>
-                      <use xlinkHref="#icon-bookmark"/>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoritesButton offerId={offerId} isOfferPage/>
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">

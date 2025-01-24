@@ -1,6 +1,8 @@
 import {Offer} from '../../types';
 import {CardType} from '../../const';
 import {Link} from 'react-router-dom';
+import {formatRating} from '../../utils';
+import FavoritesButton from '../favorite-button/favorite-button';
 
 type CardProps = {
   card: Offer;
@@ -10,7 +12,8 @@ type CardProps = {
 }
 
 function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JSX.Element {
-  const {isPremium, price, title, type,id, previewImage} = card;
+  const {isPremium, price, title, type, id, previewImage, rating} = card;
+  const ratingInStarsFormat: string = formatRating(rating);
 
   return (
     <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange?.(id)} onMouseLeave={() => onActiveOfferChange?.(null)}>
@@ -32,23 +35,11 @@ function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JS
             <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className="place-card__bookmark-button button"
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoritesButton offerId={id} isOfferPage={false}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}/>
+            <span style={{ width: `${ratingInStarsFormat}%` }}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

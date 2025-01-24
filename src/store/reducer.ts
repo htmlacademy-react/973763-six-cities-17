@@ -2,13 +2,14 @@ import {createReducer} from '@reduxjs/toolkit';
 import {setActiveCityName, setOfferSortOption} from './action';
 import {DEFAULT_CITY_NAME, DEFAULT_SORT_OPTION, LoadingStatus, AuthorizationStatus} from '../const';
 import {InitialState} from './types.ts';
-import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, fetchReviewsAction, fetchNearbyOffersAction, fetchOfferAction, loginAction, logoutAction} from './api-actions';
+import {checkAuthAction, fetchOffersAction, fetchFavoritesAction, toggleFavoriteAction, fetchReviewsAction, fetchNearbyOffersAction, fetchOfferAction, loginAction, logoutAction} from './api-actions';
 
 const initialState: InitialState = {
   offers: [],
   offersLoadingStatus: LoadingStatus.NotLoaded,
   favoriteOffers: [],
   favoritesLoadingStatus: LoadingStatus.NotLoaded,
+  favoritesToggleStatus: LoadingStatus.NotLoaded,
   activeCityName: DEFAULT_CITY_NAME,
   offerSortOption: DEFAULT_SORT_OPTION,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -44,6 +45,21 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchFavoritesAction.rejected, (state) => {
       state.favoritesLoadingStatus = LoadingStatus.Failed;
       state.favoriteOffers = [];
+    })
+    .addCase(toggleFavoriteAction.pending, (state) => {
+      state.favoritesToggleStatus = LoadingStatus.Loading;
+    })
+    .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
+      state.favoritesToggleStatus = LoadingStatus.Loaded;
+      if (action.payload.isFavorite) {
+        state.favoriteOffers.push(action.payload);
+      } else {
+        const offerIndex = state.favoriteOffers.findIndex((offer) => offer.id === action.payload.id);
+        state.favoriteOffers.splice(offerIndex, 1);
+      }
+    })
+    .addCase(toggleFavoriteAction.rejected, (state) => {
+      state.favoritesToggleStatus = LoadingStatus.Failed;
     })
     .addCase(setActiveCityName, (state, action) => {
       state.activeCityName = action.payload;

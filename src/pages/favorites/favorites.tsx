@@ -1,16 +1,13 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import LocationsList from '../../components/locations-list/locations-list';
-import {Offer} from '../../types';
-import { mockFavoriteOffers } from '../../mocks/offers';
-import {getFavoritesCities} from '../../utils.ts';
+import {useAppSelector} from '../../store/use-app-selector';
+import {getFavoriteOffers, getFavoritesCities} from '../../store/selectors';
 
-type FavoritesProps = {
-  offers?: Offer[];
-}
-
-function Favorites({offers = mockFavoriteOffers}: FavoritesProps): JSX.Element {
-  const hasOfferData = Object.keys(offers).length > 0;
+function Favorites(): JSX.Element {
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const favoriteCities = useAppSelector(getFavoritesCities);
+  const hasOfferData = favoriteOffers.length > 0;
 
   return (
     <div className={`page ${hasOfferData ? '' : 'page--favorites-empty'}`}>
@@ -21,7 +18,7 @@ function Favorites({offers = mockFavoriteOffers}: FavoritesProps): JSX.Element {
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <LocationsList IsFavorites cities={getFavoritesCities(offers)} offers={offers}/>
+              <LocationsList IsFavorites cities={favoriteCities} offers={favoriteOffers}/>
             </section>
           </div>
           :
