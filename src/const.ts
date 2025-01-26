@@ -6,7 +6,9 @@ const DEFAULT_CITY_NAME: CityName = CITIES_NAMES[0];
 
 const NEARBY_OFFERS_OM_MAP_MAX_COUNT: number = 3;
 
-const REVIEWS_OM_PAGE_MAX_COUNT: number = 3;
+const REVIEWS_OM_PAGE_MAX_COUNT: number = 10;
+
+const GALLERY_IMAGES_MAX_COUNT: number = 6;
 
 const SortOptions: SortType[] = [
   {
@@ -33,13 +35,6 @@ enum CardType {
   Favorites = 'favorites',
   Cities = 'cities',
   NearPlaces = 'near-places',
-}
-
-enum ClassNamePrefix {
-  Offer = 'offer',
-  PlaceCard = 'place-card',
-  Reviews = 'reviews',
-  Cities = 'cities'
 }
 
 enum AuthorizationStatus {
@@ -125,4 +120,4 @@ const NameSpace = {
 } as const;
 
 
-export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT, ClassNamePrefix, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles, NameSpace};
+export {SortOptions, CardType, AuthorizationStatus, CITIES_NAMES, DEFAULT_CITY_NAME, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT, GALLERY_IMAGES_MAX_COUNT, ReviewTextLength, PasswordLength, UrlMarker, IconAnchorSize, IconMarkerSize, MapInfo, DEFAULT_SORT_OPTION, APIRoute, LoadingStatus, RatingTitles, NameSpace};

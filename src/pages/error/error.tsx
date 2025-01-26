@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../routes';
-
 import './error.css';
+
 function Error(): JSX.Element {
   return (
     <div className="error">

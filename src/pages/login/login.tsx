@@ -16,6 +16,7 @@ function Login(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isAuthed = useAppSelector(getIsAuthed);
+  const handleLinkClick = () => dispatch(setActiveCityName(randomCityName));
 
   useEffect(() => {
     if (isAuthed) {
@@ -31,7 +32,7 @@ function Login(): JSX.Element {
           <SignIn/>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to={RoutePath.INDEX} className="locations__item-link" onClick={() => dispatch(setActiveCityName(randomCityName))}>
+              <Link to={RoutePath.INDEX} className="locations__item-link" onClick={handleLinkClick}>
                 <span>{randomCityName}</span>
               </Link>
             </div>
