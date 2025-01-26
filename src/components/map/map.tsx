@@ -10,18 +10,20 @@ type MapProps = {
   activeOfferId?: string | null;
   offers: Offer[];
 };
+
 const defaultCustomIcon = new Icon({
   iconUrl: UrlMarker.DEFAULT,
   iconSize: [IconMarkerSize.WIDTH, IconMarkerSize.HEIGHT],
   iconAnchor: [IconAnchorSize.WIDTH, IconAnchorSize.HEIGHT]
 });
+
 const currentCustomIcon = new Icon({
   iconUrl: UrlMarker.CURRENT,
   iconSize: [IconMarkerSize.WIDTH, IconMarkerSize.HEIGHT],
   iconAnchor: [IconAnchorSize.WIDTH, IconAnchorSize.HEIGHT]
 });
-function Map({type, activeOfferId, offers}: MapProps): JSX.Element {
 
+function Map({type, activeOfferId, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0].city);
 

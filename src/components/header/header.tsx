@@ -5,6 +5,7 @@ import {RoutePath} from '../../routes';
 type HeaderProps = {
   hasNavigation: boolean;
 }
+
 function Header({ hasNavigation }: HeaderProps): JSX.Element {
   return (
     <header className="header">

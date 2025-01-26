@@ -20,6 +20,7 @@ export const getOffersBySortOption = (offers: Offer[], sortOption: SortType) => 
 export const getReviewsByDate = (reviews: Review[]) => reviews.toSorted((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
 export const regexForPassword = new RegExp(/(?=.*[0-9])(?=.*[a-z])/);
+
 export const regexForEmail = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
 export const getRandomArrayElement = <T>(items: T[]): T => items[Math.floor(Math.random() * items.length)];

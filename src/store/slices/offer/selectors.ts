@@ -13,12 +13,11 @@ export const getOfferLoadingStatus = (state: State) => state[NameSpace.Offer].of
 export const getNearbyOffers = (state: State) => state[NameSpace.Offer].nearbyOffers;
 export const getNearbyOffersLoadingStatus = (state: State) => state[NameSpace.Offer].nearbyOffersLoadingStatus;
 
-// const { getReviewsLoadingStatus } = reviewSlice.selectors;
-
 export const getIsAppLoading = createSelector(
   [getOffersLoadingStatus, getAuthorizationStatus, getFavoritesLoadingStatus],
   (offersLoadingStatus, authorizationStatus, favoritesLoadingStatus) => offersLoadingStatus === LoadingStatus.Loading || authorizationStatus === AuthorizationStatus.UNKNOWN || favoritesLoadingStatus === LoadingStatus.Loading
 );
+
 export const getIsOfferPageLoading = createSelector(
   [getOfferLoadingStatus, getNearbyOffersLoadingStatus, getReviewsLoadingStatus],
   (offerLoadingStatus, nearbyOffersLoadingStatus, reviewsLoadingStatus) => offerLoadingStatus === LoadingStatus.Loading || nearbyOffersLoadingStatus === LoadingStatus.Loading || reviewsLoadingStatus === LoadingStatus.Loading

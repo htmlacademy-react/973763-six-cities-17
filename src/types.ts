@@ -18,7 +18,6 @@ type AuthData = {
   password: string;
 };
 
-
 type Review = {
   id: string;
   date: string;

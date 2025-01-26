@@ -5,7 +5,6 @@ import {offerSlice} from './slices/offer/offer';
 import {reviewSlice} from './slices/review/review';
 import {userSlice} from './slices/user/user';
 
-
 export const rootReducer = combineReducers({
   [NameSpace.App]: appSlice.reducer,
   [NameSpace.Offer]: offerSlice.reducer,
