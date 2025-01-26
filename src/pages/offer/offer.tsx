@@ -7,7 +7,6 @@ import Feedback from '../../components/feedback/feedback';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getIsAuthed, getOffer, getIsOfferPageLoading, getNearbyOffers, getSortedReviews} from '../../store/selectors';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useEffect} from 'react';
 import {fetchOfferAction, fetchNearbyOffersAction, fetchReviewsAction} from '../../store/api-actions';
@@ -16,6 +15,9 @@ import {formatRating} from '../../utils';
 import useScrollToTop from '../../hooks/use-scroll-to-top';
 import Error from '../error/error';
 import FavoritesButton from '../../components/favorite-button/favorite-button';
+import {getIsOfferPageLoading, getNearbyOffers, getOffer} from '../../store/slices/offer/selectors';
+import {getIsAuthed} from '../../store/slices/user/selectors';
+import {getSortedReviews} from '../../store/slices/review/selectors';
 
 function Offer(): JSX.Element {
   const {id: offerId} = useParams();

@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import LocationsList from '../../components/locations-list/locations-list';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getFavoriteOffers, getFavoritesCities} from '../../store/selectors';
+import {getFavoriteOffers, getFavoritesCities} from '../../store/slices/user/selectors.ts';
 
 function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);

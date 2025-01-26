@@ -7,12 +7,13 @@ import {RoutePath} from '../../routes';
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getFavoritesLoadingStatus, getIsAppLoading, getIsAuthed} from '../../store/selectors';
 import Spinner from '../../components/spinner/spinner';
 import {useEffect} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {fetchFavoritesAction, fetchOffersAction} from '../../store/api-actions';
 import {LoadingStatus} from '../../const';
+import {getFavoritesLoadingStatus, getIsAuthed} from '../../store/slices/user/selectors';
+import {getIsAppLoading} from '../../store/slices/offer/selectors';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

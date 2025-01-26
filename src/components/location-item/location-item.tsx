@@ -4,7 +4,7 @@ import {CardType} from '../../const';
 import {getOffersByCity} from '../../utils';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../store/use-app-dispatch';
-import {setActiveCityName} from '../../store/action';
+import {setActiveCityName} from '../../store/slices/app/app.ts';
 
 type LocationItemProps = {
   cityName: CityName;

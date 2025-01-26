@@ -2,9 +2,9 @@ import {SortOptions} from '../../const';
 import {SortType} from '../../types';
 import {useState} from 'react';
 import { useAppDispatch } from '../../store/use-app-dispatch';
-import {setOfferSortOption} from '../../store/action';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getSortOption} from '../../store/selectors';
+import {getSortOption} from '../../store/slices/app/selectors';
+import {setOfferSortOption} from '../../store/slices/app/app';
 
 function Sort(): JSX.Element {
   const [isBlockOpened, setBlockState] = useState(false);

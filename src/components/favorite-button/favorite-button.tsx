@@ -1,9 +1,9 @@
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useNavigate} from 'react-router-dom';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getIsAuthed, getFavoriteStatusByOfferId} from '../../store/selectors';
 import {RoutePath} from '../../routes';
 import {toggleFavoriteAction} from '../../store/api-actions';
+import {getFavoriteStatusByOfferId, getIsAuthed} from '../../store/slices/user/selectors';
 
 type FavoriteButtonProps = {
   offerId: string;

@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../routes';
-import {getUserData, getFavoriteOffers, getIsAuthed} from '../../store/selectors';
 import {useAppSelector} from '../../store/use-app-selector';
 import React from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {logoutAction} from '../../store/api-actions';
+import {getFavoriteOffers, getIsAuthed, getUserData} from '../../store/slices/user/selectors';
 
 function HeaderNav(): JSX.Element {
   const userData = useAppSelector(getUserData);

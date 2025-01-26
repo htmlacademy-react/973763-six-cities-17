@@ -11,20 +11,24 @@ export type AppState = {
   offerSortOption: SortType;
 }
 
-export type InitialState = {
+export type OfferState = {
   offers: Offer[];
   offersLoadingStatus: LoadingStatus;
-  favoriteOffers: Offer[];
-  favoritesLoadingStatus: LoadingStatus;
-  favoritesToggleStatus: LoadingStatus;
-  activeCityName: CityName;
-  offerSortOption: SortType;
-  authorizationStatus: AuthorizationStatus;
-  userData: UserData | null;
   offer: OfferDetail | null;
   offerLoadingStatus: LoadingStatus;
   nearbyOffers: Offer[];
   nearbyOffersLoadingStatus: LoadingStatus;
+}
+
+export type UserState = {
+  authorizationStatus: AuthorizationStatus;
+  userData: UserData | null;
+  favoriteOffers: Offer[];
+  favoritesLoadingStatus: LoadingStatus;
+  favoritesToggleStatus: LoadingStatus;
+}
+
+export type ReviewState = {
   reviews: Review[];
   reviewsLoadingStatus: LoadingStatus;
 }

@@ -3,7 +3,8 @@ import MainContainer from '../../components/main-container/main-container';
 import Header from '../../components/header/header';
 import {CITIES_NAMES} from '../../const';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getActiveCityName, getSortedOffers} from '../../store/selectors';
+import {getActiveCityName} from '../../store/slices/app/selectors';
+import {getSortedOffers} from '../../store/slices/offer/selectors';
 
 function Main(): JSX.Element {
   const activeCityName = useAppSelector(getActiveCityName);

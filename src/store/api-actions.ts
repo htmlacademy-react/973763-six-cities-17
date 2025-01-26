@@ -32,7 +32,7 @@ export const toggleFavoriteAction = createAsyncThunk<Offer, {offerId: string; is
   async ({ offerId, isFavorite }, {getState, extra: api }) => {
     const newFavoriteStatus = Number(!isFavorite);
     const { data } = await api.post<OfferDetail>(`${APIRoute.Favorite}/${offerId}/${newFavoriteStatus}`);
-    const {offers} = getState();
+    const {offers} = getState().OFFER;
     const currentOffer = offers.find((offer) => offer.id === data.id);
 
     if (!currentOffer) {
