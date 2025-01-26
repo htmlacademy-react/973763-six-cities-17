@@ -1,7 +1,7 @@
 import {Navigate} from 'react-router-dom';
 import {RoutePath} from '../../routes';
-import {getIsAuthed} from '../../store/selectors';
 import {useAppSelector} from '../../store/use-app-selector';
+import {getIsAuthed} from '../../store/slices/user/selectors';
 
 type PrivateRouteProps = {
   navigatePath: RoutePath;

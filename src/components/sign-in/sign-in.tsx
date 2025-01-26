@@ -1,4 +1,3 @@
-import React from 'react';
 import {useRef, ChangeEvent, FormEvent, useState} from 'react';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useNavigate} from 'react-router-dom';
@@ -6,14 +5,7 @@ import {PasswordLength} from '../../const';
 import {regexForEmail, regexForPassword} from '../../utils';
 import {RoutePath} from '../../routes';
 import {loginAction} from '../../store/api-actions';
-
-const validationErrorStyle: React.CSSProperties = {
-  position: 'absolute',
-  left: '2px',
-  marginTop: '-20px',
-  color: '#B22222',
-  fontSize: '12px',
-};
+import './sign-in.css';
 
 function SignIn(): JSX.Element {
   const navigate = useNavigate();
@@ -75,7 +67,7 @@ function SignIn(): JSX.Element {
             onChange={handleEmailChange}
             disabled={isSubmitting}
           />
-          {isEmailValidationError && <div style={validationErrorStyle}>Email must match example@example.com!</div>}
+          {isEmailValidationError && <div className="validation_error">Email must match example@example.com!</div>}
         </div>
         <div className="login__input-wrapper form__input-wrapper">
           <label className="visually-hidden">Password</label>
@@ -89,7 +81,7 @@ function SignIn(): JSX.Element {
             onChange={handlePasswordChange}
             disabled={isSubmitting}
           />
-          {isPasswordValidationError && <div style={validationErrorStyle}>Password must contain 3 or more letters with numbers!</div>}
+          {isPasswordValidationError && <div className="validation_error">Password must contain 3 or more letters with numbers!</div>}
         </div>
         <button className="login__submit form__submit button" type="submit" disabled={isPasswordValidationError || isEmailValidationError || isSubmitting}>
           Sign in

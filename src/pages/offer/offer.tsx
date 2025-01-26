@@ -1,13 +1,12 @@
 import CardList from '../../components/card-list/card-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
-import {CardType} from '../../const';
+import {CardType, NEARBY_OFFERS_OM_MAP_MAX_COUNT, REVIEWS_OM_PAGE_MAX_COUNT, GALLERY_IMAGES_MAX_COUNT} from '../../const';
 import Gallery from '../../components/gallery/gallery';
 import Feedback from '../../components/feedback/feedback';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../store/use-app-selector';
-import {getIsAuthed, getOffer, getIsOfferPageLoading, getNearbyOffers, getSortedReviews} from '../../store/selectors';
 import {useAppDispatch} from '../../store/use-app-dispatch';
 import {useEffect} from 'react';
 import {fetchOfferAction, fetchNearbyOffersAction, fetchReviewsAction} from '../../store/api-actions';
@@ -15,6 +14,10 @@ import Spinner from '../../components/spinner/spinner';
 import {formatRating} from '../../utils';
 import useScrollToTop from '../../hooks/use-scroll-to-top';
 import Error from '../error/error';
+import FavoritesButton from '../../components/favorite-button/favorite-button';
+import {getIsOfferPageLoading, getNearbyOffers, getOffer} from '../../store/slices/offer/selectors';
+import {getIsAuthed} from '../../store/slices/user/selectors';
+import {getSortedReviews} from '../../store/slices/review/selectors';
 
 function Offer(): JSX.Element {
   const {id: offerId} = useParams();
@@ -32,38 +35,32 @@ function Offer(): JSX.Element {
 
   const isAuthed = useAppSelector(getIsAuthed);
   const isLoading = useAppSelector(getIsOfferPageLoading);
-  const nearByOffers = useAppSelector(getNearbyOffers).slice(0, 3);
-  const reviews = useAppSelector(getSortedReviews).slice(0, 10);
+  const nearByOffers = useAppSelector(getNearbyOffers).slice(0, NEARBY_OFFERS_OM_MAP_MAX_COUNT);
+  const reviews = useAppSelector(getSortedReviews).slice(0, REVIEWS_OM_PAGE_MAX_COUNT);
   const mapOffers = offer === null ? [] : [offer, ...nearByOffers];
 
   if (isLoading) {
-    return (
-      <Spinner />
-    );
+    return <Spinner />;
   }
 
-  if (offer !== null) {
+  if (offer !== null && offerId) {
     const ratingInStarsFormat: string = formatRating(offer.rating);
     const bedroomLabel = offer.bedrooms > 1 ? `${offer.bedrooms} Bedrooms` : '1 Bedroom';
     const adultsLabel = offer.maxAdults > 1 ? `Max ${offer.maxAdults} adults` : 'Max 1 adult';
+    const images = offer.images.slice(0, GALLERY_IMAGES_MAX_COUNT);
 
     return (
       <div className="page">
         <Header hasNavigation />
         <main className="page__main page__main--offer">
           <section className="offer">
-            <Gallery images={offer.images.slice(0, 6)}/>
+            <Gallery images={images}/>
             <div className="offer__container container">
               <div className="offer__wrapper">
                 {offer.isPremium && <div className="offer__mark"><span>Premium</span></div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offer.title}</h1>
-                  <button className="offer__bookmark-button button" type="button">
-                    <svg className="offer__bookmark-icon" width={31} height={33}>
-                      <use xlinkHref="#icon-bookmark"/>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoritesButton offerId={offerId} isOfferPage/>
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">

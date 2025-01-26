@@ -1,7 +1,6 @@
 import axios, {AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
-// import toast, { Toaster } from 'react-hot-toast';
 import {getToken} from './token';
 
 const BASE_URL = 'https://16.design.htmlacademy.pro/six-cities';
