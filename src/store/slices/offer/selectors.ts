@@ -6,12 +6,12 @@ import {getAuthorizationStatus, getFavoritesLoadingStatus} from '../user/selecto
 import {getActiveCityName, getSortOption} from '../app/selectors';
 import {getOffersByCity, getOffersBySortOption} from '../../../utils.ts';
 
-export const getOffers = (state: State) => state[NameSpace.Offer].offers;
-export const getOffersLoadingStatus = (state: State) => state[NameSpace.Offer].offersLoadingStatus;
-export const getOffer = (state: State) => state[NameSpace.Offer].offer;
-export const getOfferLoadingStatus = (state: State) => state[NameSpace.Offer].offerLoadingStatus;
-export const getNearbyOffers = (state: State) => state[NameSpace.Offer].nearbyOffers;
-export const getNearbyOffersLoadingStatus = (state: State) => state[NameSpace.Offer].nearbyOffersLoadingStatus;
+export const getOffers = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].offers;
+export const getOffersLoadingStatus = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].offersLoadingStatus;
+export const getOffer = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].offer;
+export const getOfferLoadingStatus = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].offerLoadingStatus;
+export const getNearbyOffers = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].nearbyOffers;
+export const getNearbyOffersLoadingStatus = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].nearbyOffersLoadingStatus;
 
 export const getIsAppLoading = createSelector(
   [getOffersLoadingStatus, getAuthorizationStatus, getFavoritesLoadingStatus],
