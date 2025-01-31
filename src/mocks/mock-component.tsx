@@ -6,12 +6,24 @@ import {AppThunkDispatch} from './mocks';
 import {Provider} from 'react-redux';
 import {State} from '../store/types';
 import {createAPI} from '../services/api';
+// import {MemoryHistory, createMemoryHistory} from 'history';
+// import HistoryRouter from './/components/history-route/history-route';
 
 type ComponentWithMockStore = {
   withStoreComponent: JSX.Element;
   mockStore: MockStore;
   mockAxiosAdapter: MockAdapter;
 }
+
+// export function withHistory(component: JSX.Element, history?: MemoryHistory) {
+//   const memoryHistory = history ?? createMemoryHistory();
+//
+//   return (
+//     <HistoryRouter history={memoryHistory}>
+//       {component}
+//     </HistoryRouter>
+//   );
+// }
 
 export function withStore(
   component: JSX.Element,
