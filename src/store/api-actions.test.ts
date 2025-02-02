@@ -9,8 +9,7 @@ import {
   makeFakeUserData,
   makeFakeOffer,
   makeFakeReview,
-  makeFakeOfferDetail,
-  makeFakeLocation
+  makeFakeOfferDetail
 } from '../mocks/mocks';
 import { State } from './types';
 import {
@@ -26,7 +25,7 @@ import {
   toggleFavoriteAction
 } from './api-actions';
 import { APIRoute } from '../const';
-import {AuthData, ReviewFormData, Offer, OfferDetail} from '../types';
+import {AuthData, ReviewFormData, Offer} from '../types';
 import * as tokenStorage from '../services/token';
 
 describe('Async actions', () => {
@@ -330,6 +329,29 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         postReviewAction.pending.type,
         postReviewAction.rejected.type,
+      ]);
+    });
+  });
+
+  describe('toggleFavoriteAction', () => {
+    it('should dispatch "toggleFavoriteAction.pending", "toggleFavoriteAction.rejected" when server response 400', async () => {
+      const offerId = 'some-offer-id';
+      const mockOldFavoriteStatus = true;
+      const mockNewFavoriteStatus = Number(!mockOldFavoriteStatus);
+
+      const mockOffer: Offer = {
+        ...makeFakeOffer(),
+        id: offerId,
+        isFavorite: mockOldFavoriteStatus
+      };
+      mockAxiosAdapter.onPost(`${APIRoute.Favorite}/${offerId}/${mockNewFavoriteStatus}`).reply(400, []);
+
+      await store.dispatch(toggleFavoriteAction({offerId: mockOffer.id, isFavorite: mockOffer.isFavorite}));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        toggleFavoriteAction.pending.type,
+        toggleFavoriteAction.rejected.type,
       ]);
     });
   });

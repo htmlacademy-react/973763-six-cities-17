@@ -46,7 +46,7 @@ function Feedback(): JSX.Element {
   };
 
   return (
-    <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post" >
+    <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post" data-testid="feedback-container">
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -61,6 +61,7 @@ function Feedback(): JSX.Element {
               id={`${rating.value}-stars`}
               type="radio"
               disabled={isFormDisabled}
+              data-testid={`${rating.value}-stars`}
             />
             <label
               htmlFor={`${rating.value}-stars`}
@@ -81,6 +82,7 @@ function Feedback(): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         disabled={isFormDisabled}
+        data-testid='reviewElement'
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

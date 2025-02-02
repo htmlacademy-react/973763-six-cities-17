@@ -10,7 +10,7 @@ type FavoriteButtonProps = {
   isOfferPage: boolean;
 }
 
-function FavoritesButton({offerId, isOfferPage}: FavoriteButtonProps): JSX.Element {
+function FavoriteButton({offerId, isOfferPage}: FavoriteButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isAuthed = useAppSelector(getIsAuthed);
@@ -41,4 +41,4 @@ function FavoritesButton({offerId, isOfferPage}: FavoriteButtonProps): JSX.Eleme
   );
 }
 
-export default FavoritesButton;
+export default FavoriteButton;
