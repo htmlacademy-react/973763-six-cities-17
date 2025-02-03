@@ -10,7 +10,7 @@ function ReviewsItem({review}: ReviewsItemProps): JSX.Element {
   const reviewDateLabel = formatDateToString(new Date(review.date));
 
   return (
-    <li className="reviews__item">
+    <li className="reviews__item" data-testid='reviews-item-container'>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img

@@ -18,7 +18,7 @@ function HeaderNav(): JSX.Element {
   };
 
   return (
-    <nav className="header__nav">
+    <nav className="header__nav" data-testid='header-nav-container'>
       <ul className="header__nav-list">
         {isAuthed && userData ?
           <>

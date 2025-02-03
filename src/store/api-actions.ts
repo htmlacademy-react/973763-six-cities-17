@@ -67,10 +67,11 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string | undefined,
   },
 );
 
-export const postReviewAction = createAsyncThunk<void, ReviewFormData, AsyncThunkApiType>(
+export const postReviewAction = createAsyncThunk<Review, ReviewFormData, AsyncThunkApiType>(
   'data/postReview',
   async ({ id, comment, rating }, { extra: api }) => {
-    await api.post<ReviewFormData>(`${APIRoute.Comments}/${id}`, { comment, rating });
+    const { data } = await api.post<Review>(`${APIRoute.Comments}/${id}`, { comment, rating });
+    return data;
   },
 );
 

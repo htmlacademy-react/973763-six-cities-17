@@ -4,7 +4,7 @@ import './error.css';
 
 function Error(): JSX.Element {
   return (
-    <div className="error">
+    <div className="error" data-testid="error-page">
       <h1 className="error__number">404</h1>
       <div className="error__text">Not found</div>
       <Link to={RoutePath.INDEX}>Go back to main</Link>

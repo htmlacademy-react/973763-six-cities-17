@@ -14,7 +14,7 @@ import Spinner from '../../components/spinner/spinner';
 import {formatRating} from '../../utils';
 import useScrollToTop from '../../hooks/use-scroll-to-top';
 import Error from '../error/error';
-import FavoritesButton from '../../components/favorite-button/favorite-button';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {getIsOfferPageLoading, getNearbyOffers, getOffer} from '../../store/slices/offer/selectors';
 import {getIsAuthed} from '../../store/slices/user/selectors';
 import {getSortedReviews} from '../../store/slices/review/selectors';
@@ -60,7 +60,7 @@ function Offer(): JSX.Element {
                 {offer.isPremium && <div className="offer__mark"><span>Premium</span></div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offer.title}</h1>
-                  <FavoritesButton offerId={offerId} isOfferPage/>
+                  <FavoriteButton offerId={offerId} isOfferPage/>
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">

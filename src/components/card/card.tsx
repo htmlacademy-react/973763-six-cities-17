@@ -2,7 +2,7 @@ import {Offer} from '../../types';
 import {CardType} from '../../const';
 import {Link} from 'react-router-dom';
 import {formatRating} from '../../utils';
-import FavoritesButton from '../favorite-button/favorite-button';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardProps = {
   card: Offer;
@@ -16,7 +16,7 @@ function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JS
   const ratingInStarsFormat: string = formatRating(rating);
 
   return (
-    <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange?.(id)} onMouseLeave={() => onActiveOfferChange?.(null)}>
+    <article className={`${cardType}__card place-card`} onMouseEnter={() => onActiveOfferChange?.(id)} onMouseLeave={() => onActiveOfferChange?.(null)} data-testid="card-container">
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${cardType}__image-wrapper'} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
@@ -35,7 +35,7 @@ function Card({card, isFavorites, cardType, onActiveOfferChange}: CardProps): JS
             <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <FavoritesButton offerId={id} isOfferPage={false}/>
+          <FavoriteButton offerId={id} isOfferPage={false}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

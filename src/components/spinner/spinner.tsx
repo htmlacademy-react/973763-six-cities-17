@@ -1,6 +1,6 @@
 function Spinner(): JSX.Element {
   return (
-    <div className="loader" style={{top: '20vh', left: '50vw', position: 'absolute', transform: 'translateX(-50%)'}}>
+    <div className="loader" style={{top: '20vh', left: '50vw', position: 'absolute', transform: 'translateX(-50%)'}} data-testid='spinner-container'>
       <svg width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" className="loader">
         <g transform="rotate(0 50 50)">
           <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#fe718d">

@@ -7,17 +7,17 @@ export const getOffersBySortOption = (offers: Offer[], sortOption: SortType) => 
     case 'Popular':
       return offers;
     case 'PriceToHigh':
-      return offers.toSorted((a, b) => a.price - b.price);
+      return [...offers].sort((a, b) => a.price - b.price);
     case 'PriceToLow':
-      return offers.toSorted((a, b) => b.price - a.price);
+      return [...offers].sort((a, b) => b.price - a.price);
     case 'TopRated':
-      return offers.toSorted((a, b) => b.rating - a.rating);
+      return [...offers].sort((a, b) => b.rating - a.rating);
 
     default: return offers;
   }
 };
 
-export const getReviewsByDate = (reviews: Review[]) => reviews.toSorted((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
+export const getReviewsByDate = (reviews: Review[]) => [...reviews].sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
 export const regexForPassword = new RegExp(/(?=.*[0-9])(?=.*[a-z])/);
 

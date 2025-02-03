@@ -14,7 +14,7 @@ function MainContainer({activeCityName, offers}: MainContainerProps): JSX.Elemen
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   return (
-    <div className="cities">
+    <div className="cities" data-testid='main-container'>
       {offers.length > 0 ?
         <div className="cities__places-container container">
           <section className="cities__places places">
