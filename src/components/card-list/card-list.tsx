@@ -11,9 +11,9 @@ type CardListProps = {
 
 function CardList({cards, isFavorites, cardType, onActiveOfferChange}: CardListProps): JSX.Element {
   return (
-    <div data-testid='cards-list-container'>
+    <>
       {cards.map((card) => <Card card={card} isFavorites={isFavorites} cardType={cardType} onActiveOfferChange={onActiveOfferChange} key={card.id}/>)}
-    </div>
+    </>
   );
 }
 

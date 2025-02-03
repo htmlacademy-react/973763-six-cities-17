@@ -4,8 +4,8 @@ import {CardType} from '../../const';
 import {getOffersByCity} from '../../utils';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../store/use-app-dispatch';
-import {setActiveCityName} from '../../store/slices/app/app.ts';
-import {RoutePath} from '../../routes.ts';
+import {setActiveCityName} from '../../store/slices/app/app';
+import {RoutePath} from '../../routes';
 
 type LocationItemProps = {
   cityName: CityName;
@@ -20,7 +20,7 @@ function LocationItem({cityName, isFavorites, offers, isActive}: LocationItemPro
   const handleLinkClick = () => dispatch(setActiveCityName(cityName));
 
   return (
-    <li className={`${isFavorites ? 'favorites__locations-items' : 'locations__item'}`}>
+    <li className={`${isFavorites ? 'favorites__locations-items' : 'locations__item'}`} data-testid='location-item-container'>
       {
         isFavorites ?
           <>

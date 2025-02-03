@@ -28,6 +28,7 @@ function FavoriteButton({offerId, isOfferPage}: FavoriteButtonProps): JSX.Elemen
           navigate(RoutePath.LOGIN);
         }
       }}
+      data-testid="favorite-button-container"
     >
       <svg
         className={`${buttonClassName}__bookmark-icon`}

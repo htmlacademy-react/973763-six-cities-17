@@ -21,15 +21,15 @@ function Sort(): JSX.Element {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid='sort-container'>
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={handleOpenSortBlock}>
+      <span className="places__sorting-type" tabIndex={0} onClick={handleOpenSortBlock} data-testid='sort-type-element'>
         &nbsp;{sortOption.value}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isBlockOpened && 'places__options--opened'}`}>
+      <ul className={`places__options places__options--custom ${isBlockOpened && 'places__options--opened'}`} data-testid='sort-options-block'>
         {SortOptions.map((sortType) => <li className={`places__option ${sortOption === sortType ? 'places__option--active' : ''}`} tabIndex={0} key={sortType.name} onClick={() => handleSortClick(sortType)}>{sortType.value}</li>)}
       </ul>
     </form>

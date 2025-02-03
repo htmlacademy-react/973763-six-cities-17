@@ -52,7 +52,7 @@ function SignIn(): JSX.Element {
   };
 
   return (
-    <section className="login">
+    <section className="login" data-testid='sign-in-container'>
       <h1 className="login__title">Sign in</h1>
       <form className="login__form form" onSubmit={handleSubmit}>
         <div className="login__input-wrapper form__input-wrapper">

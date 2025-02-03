@@ -12,17 +12,14 @@ vi.mock('../../components/card/card', () => {
 
 describe('Component: CardsList', () => {
   it('should render correctly', () => {
-    const expectedTestId = 'cards-list-container';
     const cardContainerTestId = 'card-container';
     const offers = [makeFakeOffer()];
     const cardMouseEnterLeaveHandler = vi.fn();
 
     render(<CardList cards={offers} isFavorites cardType={CardType.Favorites} onActiveOfferChange={cardMouseEnterLeaveHandler} />);
 
-    const cardsListContainer = screen.getByTestId(expectedTestId);
     const cardItems = screen.getAllByTestId(cardContainerTestId);
 
-    expect(cardsListContainer).toBeInTheDocument();
     expect(cardItems.length).toBe(1);
   });
 });
